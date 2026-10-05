@@ -76,7 +76,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
     try {
       await controller.markAllRead();
     } on Object {
-
+      return;
     }
   }
 
@@ -182,7 +182,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
     try {
       await controller.markRead(n.id);
     } on Object {
-
+      return;
     }
   }
 

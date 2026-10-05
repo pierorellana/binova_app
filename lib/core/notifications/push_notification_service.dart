@@ -73,7 +73,6 @@ class PushNotificationService implements PushRegistrationCoordinator {
     if (_platform != TargetPlatform.android || _active) return;
     final messaging = _messaging;
     if (messaging == null) return;
-    _active = true;
     await _initializeLocalNotifications();
     await messaging.requestPermission(
       alert: true,
@@ -92,6 +91,7 @@ class PushNotificationService implements PushRegistrationCoordinator {
       FirebaseMessaging.onMessageOpenedApp.listen(_onMessageOpenedApp),
     );
     final initialMessage = await messaging.getInitialMessage();
+    _active = true;
     if (initialMessage != null) _onMessageOpenedApp(initialMessage);
   }
 

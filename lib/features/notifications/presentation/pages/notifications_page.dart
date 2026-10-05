@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../app/routing/app_router.dart';
 import '../../../../core/design_system/binova_widgets.dart';
+import '../../domain/notification_link.dart';
 import '../../domain/entities/notification.dart';
 import '../providers/notifications_controller.dart';
 
@@ -198,7 +199,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
   }
 
   void _open(NotificationsController controller, AppNotification n) {
-    final link = _Link.of(n);
+    final link = NotificationLink.fromNotification(n);
     if (link == null) return;
     _markRead(controller, n);
     Navigator.of(context).pushNamed(link.route, arguments: link.argument);
@@ -259,37 +260,6 @@ String _timeLabel(DateTime created) {
 
 bool _asksConfirmation(AppNotification n) =>
     n.type == NotificationType.security && (n.resourceType == 'session' || n.body.contains('¿Fuiste tú?'));
-
-
-class _Link {
-  const _Link(this.label, this.route, [this.argument]);
-
-  final String label;
-  final String route;
-  final Object? argument;
-
-  static _Link? of(AppNotification n) {
-    final id = n.resourceId;
-    if (id != null) {
-      switch (n.resourceType) {
-        case 'transaction':
-          return _Link('Ver movimiento', AppRoute.transactionDetail, id);
-        case 'account':
-          return _Link('Ver cuenta', AppRoute.accountDetail, id);
-        case 'card':
-          return _Link('Ver tarjeta', AppRoute.cardDetail, id);
-      }
-    }
-    return switch (n.type) {
-      NotificationType.informational => const _Link('Abrir Insights', AppRoute.insights),
-      NotificationType.security when !_asksConfirmation(n) => const _Link('Ir a Perfil', AppRoute.profile),
-      _ => null,
-    };
-  }
-}
-
-
-
 
 
 class _GroupSection extends StatelessWidget {
@@ -376,7 +346,7 @@ class _NotificationRow extends StatelessWidget {
     final cat = _Category.of(n.type);
     final unread = !n.read;
     final asks = _asksConfirmation(n);
-    final link = _Link.of(n);
+    final link = NotificationLink.fromNotification(n);
 
     Widget? footer;
     if (asks && confirmed) {

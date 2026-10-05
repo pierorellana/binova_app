@@ -66,6 +66,33 @@ Los errores conservan `data: null` y agregan un código estable:
 
 El detalle ejecutable está en [`../context_specs/contracts/openapi.yaml`](../context_specs/contracts/openapi.yaml). `meta.nextCursor` se utiliza para lecturas paginadas y `X-Correlation-Id` enlaza la llamada móvil con el API.
 
+## Push Android
+
+La app usa Firebase Cloud Messaging únicamente en Android. El proyecto ya incluye
+android/app/google-services.json para el proyecto Firebase binova-92083 y
+lib/firebase_options.dart con las opciones Android generadas desde esa configuración.
+El archivo de cuenta de servicio de Firebase pertenece exclusivamente al API y nunca
+debe copiarse al proyecto Flutter.
+
+En el primer login o desbloqueo biométrico, la app solicita permiso de notificaciones,
+obtiene el token FCM y registra solo el id devuelto por POST /v1/devices en el
+almacenamiento local. El token FCM no se persiste ni se escribe en logs. Al cerrar
+sesión se revoca el dispositivo en el API.
+
+Los mensajes en primer plano se muestran mediante una notificación local con el canal
+binova_general. En segundo plano o con la app terminada, Android muestra el mensaje
+FCM en la bandeja y los taps se resuelven mediante onMessageOpenedApp o
+getInitialMessage. Solo se permiten destinos conocidos: movimiento, cuenta, tarjeta,
+perfil e Insights; un payload inválido vuelve a Inicio.
+
+Para probarlo se necesita un emulador Android con Google Play Services o un dispositivo
+Android, el API accesible desde ese equipo, Firebase Messaging habilitado y una sesión
+iniciada. Con PUSH_TEST_ENDPOINT_ENABLED=true en el API, se puede invocar
+POST /v1/notifications/test con el access token para generar una notificación segura.
+
+La compilación iOS no inicializa Firebase en esta iteración; la configuración y
+recepción push de iOS quedan fuera del alcance aprobado.
+
 ## Logs sanitizados
 
 Al ejecutar la app en local, debug o demo, los logs aparecen en la consola de `flutter run` y en las herramientas de desarrollo de Dart. Cada respuesta registra únicamente método, ruta, status HTTP, duración, mensaje, código estable y `traceId`.
@@ -74,4 +101,4 @@ No se registran `data`, cuerpos de solicitud, headers de autorización, access/r
 
 ## Alcance actual
 
-La app cubre onboarding, autenticación y sesión segura, dashboard personalizado, cuentas, movimientos, operaciones demo de transferencia/pago/recarga, tarjetas, insights, tipo de cambio, inbox de notificaciones, perfil y estados degradados. FCM/push real, Crashlytics/Sentry y un flujo E2E automatizado todavía requieren integración/evidencia adicional.
+La app cubre onboarding, autenticación y sesión segura, dashboard personalizado, cuentas, movimientos, operaciones demo de transferencia/pago/recarga, tarjetas, insights, tipo de cambio, inbox de notificaciones, push Android en primer y segundo plano, navegación desde notificaciones, perfil y estados degradados. Crashlytics/Sentry y un flujo E2E automatizado todavía requieren integración/evidencia adicional; la validación push en dispositivo real queda pendiente.

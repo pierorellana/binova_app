@@ -4,12 +4,14 @@ import '../../core/config/app_config.dart';
 import '../../core/network/api_client.dart';
 import '../../core/network/authenticated_api_client.dart';
 import '../../core/network/demo_network_mode.dart';
+import '../../core/notifications/push_notification_service.dart';
 import '../../core/observability/observability.dart';
 import '../../core/security/biometric_authenticator.dart';
 import '../../core/security/biometric_preference_store.dart';
 import '../../core/security/secure_session_store.dart';
 import '../../core/storage/json_cache_store.dart';
 import '../../core/storage/onboarding_store.dart';
+import '../../core/storage/push_registration_store.dart';
 import '../../features/auth/data/datasources/auth_local_data_source.dart';
 import '../../features/auth/data/datasources/auth_remote_data_source.dart';
 import '../../features/auth/data/repositories/auth_repository_impl.dart';
@@ -41,6 +43,7 @@ import '../../features/exchange/domain/repositories/exchange_rate_repository.dar
 import '../../features/profile/data/datasources/profile_remote_data_source.dart';
 import '../../features/profile/data/repositories/profile_repository_impl.dart';
 import '../../features/profile/domain/repositories/profile_repository.dart';
+import '../routing/push_navigation_coordinator.dart';
 
 class AppServices {
   AppServices({
@@ -58,6 +61,8 @@ class AppServices {
     required this.operationsRepository,
     required this.exchangeRateRepository,
     required this.profileRepository,
+    required this.pushNotifications,
+    required this.pushNavigation,
     required this.observability,
     required this.demoNetworkMode,
   });
@@ -76,6 +81,8 @@ class AppServices {
   final OperationsRepository operationsRepository;
   final ExchangeRateRepository exchangeRateRepository;
   final ProfileRepository profileRepository;
+  final PushNotificationService pushNotifications;
+  final PushNavigationCoordinator pushNavigation;
   final Observability observability;
   final DemoNetworkModeController demoNetworkMode;
 
@@ -104,6 +111,20 @@ class AppServices {
       sessionStore: secureStore,
       refreshSession: (refreshToken) =>
           remote.refresh(refreshToken: refreshToken),
+    );
+    final notificationRepository = NotificationRepositoryImpl(
+      remote: HttpNotificationRemoteDataSource(authenticatedClient),
+      cache: cache,
+    );
+    final profileRepository = ProfileRepositoryImpl(
+      HttpProfileRemoteDataSource(authenticatedClient),
+    );
+    final pushNavigation = PushNavigationCoordinator();
+    final pushNotifications = PushNotificationService(
+      profileRepository: profileRepository,
+      notificationRepository: notificationRepository,
+      registrationStore: SharedPreferencesPushRegistrationStore(preferences),
+      navigation: pushNavigation,
     );
     return AppServices(
       config: config,
@@ -136,10 +157,7 @@ class AppServices {
         remote: HttpInsightsRemoteDataSource(authenticatedClient),
         cache: cache,
       ),
-      notificationRepository: NotificationRepositoryImpl(
-        remote: HttpNotificationRemoteDataSource(authenticatedClient),
-        cache: cache,
-      ),
+      notificationRepository: notificationRepository,
       operationsRepository: OperationsRepositoryImpl(
         HttpOperationsRemoteDataSource(authenticatedClient),
       ),
@@ -147,9 +165,9 @@ class AppServices {
         remote: HttpExchangeRateRemoteDataSource(authenticatedClient),
         cache: cache,
       ),
-      profileRepository: ProfileRepositoryImpl(
-        HttpProfileRemoteDataSource(authenticatedClient),
-      ),
+      profileRepository: profileRepository,
+      pushNotifications: pushNotifications,
+      pushNavigation: pushNavigation,
       observability: observability,
       demoNetworkMode: demoNetworkMode,
     );

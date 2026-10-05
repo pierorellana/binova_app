@@ -12,6 +12,7 @@ enum AppEvent {
   cacheFallbackUsed,
   operationStarted,
   operationResult,
+  pushRegistrationFailure,
 }
 
 abstract interface class Observability {

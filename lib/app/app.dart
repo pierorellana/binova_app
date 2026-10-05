@@ -53,6 +53,7 @@ class BInovaApp extends StatelessWidget {
             repository: services.authRepository,
             biometric: services.biometricAuthenticator,
             observability: services.observability,
+            pushNotifications: services.pushNotifications,
           ),
         ),
         ChangeNotifierProvider<DashboardController>(
@@ -84,6 +85,7 @@ class BInovaApp extends StatelessWidget {
         Provider<ProfileRepository>.value(value: services.profileRepository),
       ],
       child: MaterialApp(
+        navigatorKey: services.pushNavigation.navigatorKey,
         title: 'BInova',
         debugShowCheckedModeBanner: false,
         theme: BinovaTheme.light(),

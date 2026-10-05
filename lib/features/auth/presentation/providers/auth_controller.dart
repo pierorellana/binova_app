@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import '../../../../core/errors/app_failure.dart';
 import '../../../../core/observability/observability.dart';
+import '../../../../core/notifications/push_notification_service.dart';
 import '../../../../core/security/biometric_authenticator.dart';
 import '../../domain/entities/session.dart';
 import '../../domain/repositories/auth_repository.dart';
@@ -19,13 +20,17 @@ class AuthController extends ChangeNotifier {
     required AuthRepository repository,
     required BiometricAuthenticator biometric,
     Observability observability = const NoopObservability(),
+    PushRegistrationCoordinator pushNotifications =
+        const NoopPushRegistrationCoordinator(),
   })  : _repository = repository,
         _biometric = biometric,
-        _observability = observability;
+        _observability = observability,
+        _pushNotifications = pushNotifications;
 
   final AuthRepository _repository;
   final BiometricAuthenticator _biometric;
   final Observability _observability;
+  final PushRegistrationCoordinator _pushNotifications;
 
   AuthStatus status = AuthStatus.idle;
   Session? session;
@@ -43,6 +48,7 @@ class AuthController extends ChangeNotifier {
     notifyListeners();
     try {
       session = await _repository.login(username: username, password: password);
+      await _activatePush();
       status = AuthStatus.authenticated;
       _observability.track(AppEvent.loginSuccess);
     } on AppFailure catch (error) {
@@ -80,6 +86,7 @@ class AuthController extends ChangeNotifier {
         return false;
       }
       session = await _repository.unlockSession();
+      await _activatePush();
       status = AuthStatus.authenticated;
       notifyListeners();
       return true;
@@ -96,16 +103,35 @@ class AuthController extends ChangeNotifier {
 
   Future<void> logout() async {
     try {
+      await _deactivatePush();
       await _repository.logout();
-    } catch (_) {
-
-
+    } on Object {
+      _observability.track(
+        AppEvent.pushRegistrationFailure,
+        parameters: const <String, Object?>{'status': 'logout_failed'},
+      );
     } finally {
       session = null;
       status = AuthStatus.idle;
       errorMessage = null;
       _observability.track(AppEvent.logout);
       notifyListeners();
+    }
+  }
+
+  Future<void> _activatePush() async {
+    try {
+      await _pushNotifications.activate();
+    } on Object {
+      _observability.track(AppEvent.pushRegistrationFailure);
+    }
+  }
+
+  Future<void> _deactivatePush() async {
+    try {
+      await _pushNotifications.deactivate();
+    } on Object {
+      _observability.track(AppEvent.pushRegistrationFailure);
     }
   }
 }

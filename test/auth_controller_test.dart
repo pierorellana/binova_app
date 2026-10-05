@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:binova_app/core/security/biometric_authenticator.dart';
+import 'package:binova_app/core/notifications/push_notification_service.dart';
 import 'package:binova_app/features/auth/domain/entities/session.dart';
 import 'package:binova_app/features/auth/domain/entities/user.dart';
 import 'package:binova_app/features/auth/domain/repositories/auth_repository.dart';
@@ -35,6 +36,21 @@ void main() {
     expect(unlocked, isFalse);
     expect(controller.status, AuthStatus.failure);
     expect(repository.unlockCalls, 0);
+  });
+
+  test('activates push after login and deactivates it on logout', () async {
+    final push = _FakePushRegistrationCoordinator();
+    final controller = AuthController(
+      repository: _FakeAuthRepository(_session()),
+      biometric: _FakeBiometric(isAvailable: true, accepted: true),
+      pushNotifications: push,
+    );
+
+    await controller.login(username: 'demo', password: 'password');
+    await controller.logout();
+
+    expect(push.activateCalls, 1);
+    expect(push.deactivateCalls, 1);
   });
 }
 
@@ -96,5 +112,20 @@ class _FakeAuthRepository implements AuthRepository {
   Future<Session> unlockSession() async {
     unlockCalls++;
     return session;
+  }
+}
+
+class _FakePushRegistrationCoordinator implements PushRegistrationCoordinator {
+  int activateCalls = 0;
+  int deactivateCalls = 0;
+
+  @override
+  Future<void> activate() async {
+    activateCalls++;
+  }
+
+  @override
+  Future<void> deactivate() async {
+    deactivateCalls++;
   }
 }

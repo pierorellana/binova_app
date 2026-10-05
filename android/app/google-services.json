@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "475028356738",
+    "project_id": "binova-92083",
+    "storage_bucket": "binova-92083.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475028356738:android:111e8f4e7713f09a967e9b",
+        "android_client_info": {
+          "package_name": "com.example.binova_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMnAZS1QKWWK_hbXOTN-k7-fuvf9oQKh4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

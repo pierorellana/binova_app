@@ -27,7 +27,7 @@ abstract final class CardGlyphs {
   static final plus = bnLine('<path d="M12 5v14M5 12h14"/>', stroke: 2);
 }
 
-/// `.st`: rise 380 ms, 10 px.
+
 class CardRise extends StatelessWidget {
   const CardRise({required this.child, this.delay = 0, super.key});
 
@@ -43,8 +43,8 @@ class CardRise extends StatelessWidget {
       );
 }
 
-/// Lays out a column that pins its last child to the bottom (`margin-top:
-/// auto`) and scrolls only when the screen is shorter than the 844 pt frame.
+
+
 class CardFillScroll extends StatelessWidget {
   const CardFillScroll({required this.child, super.key});
 
@@ -62,9 +62,9 @@ class CardFillScroll extends StatelessWidget {
       );
 }
 
-/// Final-state behavior shared by every screen that shows the wallet:
-/// stack order, flip, freeze / limits / Wallet through [CardDetailController]
-/// and the toast.
+
+
+
 mixin CardWalletMixin<T extends StatefulWidget> on State<T> {
   final List<String> walletOrder = <String>[];
   bool walletFlipped = false;
@@ -72,14 +72,14 @@ mixin CardWalletMixin<T extends StatefulWidget> on State<T> {
   final Map<String, bool> _optimisticFrozen = <String, bool>{};
   ({String message, bool ok, int id})? _toast;
 
-  /// Controller used for the card actions (one per card).
+
   CardDetailController detailControllerFor(Card card);
 
   Card latest(Card card) => _updated[card.id] ?? card;
 
   bool isFrozen(Card card) => _optimisticFrozen[card.id] ?? latest(card).status == CardStatus.frozen;
 
-  /// Keeps the current order for known ids and appends new ones.
+
   void syncWalletOrder(Iterable<String> ids) {
     final present = ids.toList();
     walletOrder
@@ -168,11 +168,11 @@ mixin CardWalletMixin<T extends StatefulWidget> on State<T> {
     }
   }
 
-  /// Toast overlay (`bottom: 112px`); place it last in the page stack.
+
   Widget buildCardToast() {
     final toast = _toast;
-    // Must stay a Positioned: a bare non-positioned child would make the
-    // page Stack size itself to 0×0 and clip everything.
+
+
     if (toast == null) return const Positioned(left: 0, top: 0, child: SizedBox.shrink());
     return Positioned(
       left: 24,
@@ -190,7 +190,7 @@ mixin CardWalletMixin<T extends StatefulWidget> on State<T> {
   }
 }
 
-/// "Disponible $2,180.00" from the credit line behind the credit card.
+
 String? _creditAvailable(BuildContext context) {
   final credit = context
       .watch<AccountsController>()
@@ -202,8 +202,8 @@ String? _creditAvailable(BuildContext context) {
   return 'Disponible ${BnFormat.money(amount, symbol: BnFormat.currencySymbol(credit.currency))}';
 }
 
-/// Wallet panel under the stack: title, status, the four round actions,
-/// swipe hint and "Listo".
+
+
 class CardWalletPanel extends StatelessWidget {
   const CardWalletPanel({
     required this.card,
@@ -414,7 +414,7 @@ class _RoundAction extends StatelessWidget {
       );
 }
 
-/// `.toast`: 2400 ms (in 0–12%, hold to 85%, fade out).
+
 class CardToast extends StatefulWidget {
   const CardToast({required this.message, required this.onDone, this.ok = true, super.key});
 
@@ -480,8 +480,8 @@ class _CardToastState extends State<CardToast> with SingleTickerProviderStateMix
       );
 }
 
-/// Límites sheet. Values are the daily limits of the card; tapping an amount
-/// edits it and "Listo" saves the change through the controller.
+
+
 class CardLimitsSheet extends StatefulWidget {
   const CardLimitsSheet({required this.card, required this.controller, super.key});
 
@@ -691,7 +691,7 @@ class _LimitRowState extends State<_LimitRow> {
   }
 }
 
-/// Error placeholder with the canvas' alert tile (used when nothing loaded).
+
 class CardsLoadError extends StatelessWidget {
   const CardsLoadError(
       {required this.title, required this.message, required this.actionLabel, required this.onAction, super.key});

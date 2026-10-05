@@ -17,9 +17,9 @@ const _sideShadow = [
   BoxShadow(color: Color(0x14141518), offset: Offset(0, 2), blurRadius: 6),
 ];
 
-/// One card of the stack: `.lift` (arc / enter / failOut) → `.tilt` →
-/// `.flip` with both faces, plus the outline, `.frost`, `.shade` and `.hit`
-/// layers. Perspective 1200 px around the card center, as in the canvas.
+
+
+
 class WalletCard extends StatefulWidget {
   const WalletCard({
     required this.visual,
@@ -44,14 +44,14 @@ class WalletCard extends StatefulWidget {
   final bool frozen;
   final double shade;
 
-  /// Front card in the final state: follows the finger and can flip.
+
   final bool tiltEnabled;
   final bool flipped;
 
-  /// Null while the stack is locked (intro, Face ID, construction).
+
   final VoidCallback? onTap;
 
-  /// Horizontal swipe on the front card: 1 = next, -1 = previous.
+
   final ValueChanged<int>? onSwipe;
 
   @override
@@ -62,7 +62,7 @@ class _WalletCardState extends State<WalletCard> with TickerProviderStateMixin {
   late final AnimationController _build =
       AnimationController(vsync: this, duration: Duration(milliseconds: CardBuildTimeline.total.round()));
   late final AnimationController _arc = AnimationController(vsync: this, duration: BnMotion.tarjetaAlApilar);
-  // failOut: 700 ms after a 200 ms delay.
+
   late final AnimationController _fail = AnimationController(vsync: this, duration: const Duration(milliseconds: 900));
 
   Offset _tilt = Offset.zero;
@@ -121,12 +121,12 @@ class _WalletCardState extends State<WalletCard> with TickerProviderStateMixin {
         final lift = Matrix4.identity()..setEntry(3, 2, -1 / 1200);
 
         if (reduce) {
-          // Reduced motion: every keyframe animation becomes a 200 ms fade-in.
+
           if (widget.building) opacity *= (buildMs! / 200).clamp(0.0, 1.0);
           if (_arc.isAnimating) opacity *= (_arc.value * 720 / 200).clamp(0.0, 1.0);
         } else {
           if (buildMs != null) {
-            // enter: translateY(40) rotateX(26deg) scale(.9), opacity 0 → none.
+
             final e = CardBuildTimeline.seg(buildMs, 0, 620, BnMotion.entradaExpresiva);
             opacity *= e;
             lift
@@ -135,7 +135,7 @@ class _WalletCardState extends State<WalletCard> with TickerProviderStateMixin {
               ..scale(lerpDouble(.9, 1, e)!);
           }
           if (_arc.value > 0 && _arc.value < 1) {
-            // arc: 40% → rotateX(16deg) translateZ(18px).
+
             final v = _arc.value;
             final p = v < .4 ? BnMotion.entrada.transform(v / .4) : 1 - BnMotion.entrada.transform((v - .4) / .6);
             lift
@@ -222,8 +222,8 @@ class _WalletCardState extends State<WalletCard> with TickerProviderStateMixin {
         },
       );
 
-  /// failOut keyframes (0/20/40/60/100%), each segment eased with
-  /// cubic-bezier(.4,0,1,1), after a 200 ms delay.
+
+
   static (double, double, double, double) _failPose(double ms) {
     final v = ((ms - 200) / 700).clamp(0.0, 1.0);
     const stops = [0.0, .2, .4, .6, 1.0];
@@ -241,7 +241,7 @@ class _WalletCardState extends State<WalletCard> with TickerProviderStateMixin {
   }
 }
 
-/// `.tilt` (180 ms ease-out, glare follows) + `.flip` (640 ms rotateY 180°).
+
 class _TiltFlip extends StatelessWidget {
   const _TiltFlip({
     required this.visual,
@@ -325,7 +325,7 @@ class _TiltTween extends Tween<_TiltValue> {
   }
 }
 
-/// `.side`: r20, clipped, with the card drop shadow.
+
 class _Side extends StatelessWidget {
   const _Side({required this.child});
 
@@ -344,7 +344,7 @@ class _Side extends StatelessWidget {
       );
 }
 
-/// `.frost`: translucent warm veil, 1.5 px backdrop blur and a lock badge.
+
 class _Frost extends StatelessWidget {
   const _Frost();
 
@@ -371,11 +371,11 @@ class _Frost extends StatelessWidget {
       );
 }
 
-/// Construction outline: stroke draw (60 + 520 ms) and `outlineLife` fade.
+
 class _Outline extends StatelessWidget {
   const _Outline({required this.ms});
 
-  /// Null once the outline has faded out (or was never drawn).
+
   final double? ms;
 
   @override
@@ -402,7 +402,7 @@ class _OutlinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     if (progress <= 0) return;
-    // SVG <rect x=.75 y=.75 rx=20>: the path starts after the top-left corner.
+
     const i = .75;
     const r = 20.0;
     final w = size.width - i;

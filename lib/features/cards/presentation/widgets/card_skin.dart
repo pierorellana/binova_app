@@ -6,8 +6,8 @@ import 'package:flutter/widgets.dart';
 
 import '../../domain/entities/card.dart';
 
-/// Visual identity of each card product, copied from `CARDS` in
-/// `Tarjetas.dc.html` (gradients, ink colors, chip, swatch, copy).
+
+
 enum CardSkin {
   debit(
     name: 'Débito',
@@ -54,8 +54,8 @@ enum CardSkin {
   final Color swatch;
   final String desc;
 
-  /// Secondary line under the title in the wallet panel (no backing data for
-  /// the credit line, so it is omitted there).
+
+
   final String? sub;
 
   String get title => 'Tarjeta $name';
@@ -66,7 +66,7 @@ enum CardSkin {
   }
 }
 
-/// Everything the stack needs to draw one card.
+
 class CardVisual {
   const CardVisual({
     required this.id,
@@ -91,14 +91,14 @@ class CardVisual {
   final Card? card;
 }
 
-/// Last four digits of a masked PAN, padded with bullets when unknown.
+
 String cardLast4(String maskedPan) {
   final digits = maskedPan.replaceAll(RegExp(r'\D'), '');
   final last = digits.length >= 4 ? digits.substring(digits.length - 4) : digits;
   return last.padLeft(4, '•');
 }
 
-/// Card surface: the product gradient plus (front only) its texture.
+
 class CardSkinPainter extends CustomPainter {
   const CardSkinPainter(this.skin, {this.texture = true});
 
@@ -107,13 +107,13 @@ class CardSkinPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Zero-sized layouts (mid-transition) would produce a NaN gradient matrix.
+
     if (size.isEmpty) return;
     final rect = Offset.zero & size;
     final paint = Paint();
     switch (skin) {
       case CardSkin.debit:
-        // radial-gradient(130% 140% at 22% 12%, #2E2F35 0%, #17181B 50%, #0E0F11 100%)
+
         final rx = size.width * 1.3;
         final ry = size.height * 1.4;
         final m = Matrix4.identity()
@@ -144,7 +144,7 @@ class CardSkinPainter extends CustomPainter {
       case CardSkin.debit:
         break;
       case CardSkin.credit:
-        // repeating-radial-gradient(circle at 115% 120%, rgba(20,21,24,.05) 0 1px, transparent 1px 9px)
+
         final center = Offset(size.width * 1.15, size.height * 1.2);
         final reach = center.distance;
         final ring = Paint()
@@ -155,7 +155,7 @@ class CardSkinPainter extends CustomPainter {
           canvas.drawCircle(center, r, ring);
         }
       case CardSkin.virtual:
-        // radial-gradient(rgba(255,255,255,.14) 1px, transparent 1.2px) / 10px 10px
+
         final dot = Paint()..color = const Color(0x24FFFFFF);
         for (var y = 5.0; y < size.height; y += 10) {
           for (var x = 5.0; x < size.width; x += 10) {
@@ -171,12 +171,12 @@ class CardSkinPainter extends CustomPainter {
       oldDelegate.skin != skin || oldDelegate.texture != texture;
 }
 
-/// `radial-gradient(circle at sx sy, rgba(255,255,255,a), transparent 55%)`
-/// — the glare that follows the finger on the front card.
+
+
 class CardGlarePainter extends CustomPainter {
   const CardGlarePainter({required this.center, required this.alpha});
 
-  /// Fractional position (0..1) inside the card.
+
   final Offset center;
   final double alpha;
 
@@ -205,7 +205,7 @@ class CardGlarePainter extends CustomPainter {
       oldDelegate.center != center || oldDelegate.alpha != alpha;
 }
 
-/// Start/end points of a CSS `linear-gradient(<deg>, ...)` over [size].
+
 (Offset, Offset) _cssLinear(double degrees, Size size) {
   final a = degrees * math.pi / 180;
   final dir = Offset(math.sin(a), -math.cos(a));

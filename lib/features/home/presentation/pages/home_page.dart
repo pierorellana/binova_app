@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _accounts.addListener(_syncTransactions);
-    // Keeps "Actualizado hace N min" current.
+
     _ticker = Timer.periodic(const Duration(seconds: 30), (_) {
       if (mounted) setState(() {});
     });
@@ -63,12 +63,12 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     _ticker?.cancel();
     _accounts.removeListener(_syncTransactions);
-    // Not disposed: a pending load() would notify a disposed notifier.
+
     _transactions?.removeListener(_onTransactions);
     super.dispose();
   }
 
-  /// Movements come from the main (non-credit) account.
+
   Account? get _mainAccount {
     final list = _accounts.accounts;
     if (list.isEmpty) return null;
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
         if (_transactions != null) _transactions!.load(),
       ]);
 
-  /// Reintentar: Sin conexión → Cargando inicio (skeleton) → Inicio.
+
   Future<void> _retry() async {
     BnHaptics.tap();
     setState(() => _retrying = true);
@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
       from: rowRect,
       name: account.name,
       maskedNumber: account.maskedNumber,
-      // The detail header always shows the balance (the canvas `.xp` is never masked).
+
       amount: BnFormat.money(homeAmount(account.availableBalance.amount),
           symbol: BnFormat.currencySymbol(account.currency)),
       navigate: () => _push(AppRoute.accountDetail, arguments: AccountRouteArgs(account.id, fromHome: true)),
@@ -167,7 +167,7 @@ class _HomePageState extends State<HomePage> {
           HomeHeader(
             displayName: displayName,
             onAvatar: () => _switchTab(AppRoute.profile),
-            // Developer tools stay reachable (debug/demo builds only).
+
             onAvatarLongPress: demoTools ? () => _push(AppRoute.developerTools) : null,
             onBell: () => _push(AppRoute.notifications),
             hasUnread: notifications.items.any((n) => !n.read),
@@ -215,7 +215,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  /// `Estado-SinConexion`: cached data, operations disabled.
+
   Widget _offline(String displayName, HomeData data, DateTime? fetchedAt) {
     final at = fetchedAt ?? DateTime.now();
     void noop() {}
@@ -252,7 +252,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  /// No cached dashboard to show: header + banner with Reintentar.
+
   Widget _error(String displayName, String? message) => BnTabScaffold(
         tab: BnTab.home,
         onRefresh: _reload,

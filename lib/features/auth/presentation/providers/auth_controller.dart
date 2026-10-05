@@ -98,8 +98,8 @@ class AuthController extends ChangeNotifier {
     try {
       await _repository.logout();
     } catch (_) {
-      // The repository always clears the local session in its finally block.
-      // A remote revocation failure must not keep the user in the app.
+
+
     } finally {
       session = null;
       status = AuthStatus.idle;

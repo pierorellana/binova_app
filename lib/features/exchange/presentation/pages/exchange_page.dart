@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/design_system/binova_widgets.dart';
 import '../providers/exchange_rate_controller.dart';
 
-/// Currencies offered by the converter (`CUR` in the canvas).
+
 class _Currency {
   const _Currency(this.code, this.symbol, this.name);
 
@@ -35,7 +35,7 @@ const _amountStyle = TextStyle(
   fontFeatures: BnType.tabular,
 );
 
-/// `toLocaleString('en-US', { maximumFractionDigits: 4 })`.
+
 String _formatRate(double value) {
   final fixed = value.toStringAsFixed(4).replaceFirst(RegExp(r'\.?0+$'), '');
   final parts = fixed.split('.');
@@ -487,7 +487,7 @@ class _RateCard extends StatelessWidget {
       );
 }
 
-/// 36 pt refresh glyph that spins (`.spin` 800 ms linear) while busy.
+
 class _RefreshButton extends StatefulWidget {
   const _RefreshButton({required this.busy, required this.onTap});
 
@@ -621,7 +621,7 @@ class _ServiceDown extends StatelessWidget {
       );
 }
 
-/// "Seleccionar moneda" sheet: bordered list of the six currencies.
+
 class _CurrencySheet extends StatelessWidget {
   const _CurrencySheet({required this.title, required this.selected});
 

@@ -9,9 +9,9 @@ import '../../../../core/design_system/binova_widgets.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../widgets/bn_compact_button.dart';
 
-/// Splash (`Main.dc.html`): the 3D isotipo tile resolves into the BInova
-/// wordmark in 2.47 s. Navigation waits for both the choreography and the
-/// [BootstrapController]; the exit only plays once the destination is known.
+
+
+
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
@@ -100,7 +100,7 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
   }
 }
 
-/// Progress (0–1) of a CSS animation segment at [ms], with its timing curve.
+
 double _seg(double ms, double start, double duration, [Curve curve = Curves.linear]) =>
     curve.transform(((ms - start) / duration).clamp(0.0, 1.0));
 
@@ -114,7 +114,7 @@ class _Choreography extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // .group: reduced motion fades in; otherwise exits at 2250 ms.
+
     final double groupOpacity;
     final double groupScale;
     if (reduce) {
@@ -219,7 +219,7 @@ class _Choreography extends StatelessWidget {
     );
   }
 
-  /// `.b` / `.i`: 420 ms slide with a 6 px blur that clears.
+
   Widget _slideIn(Widget letter, {required double start, required double from}) {
     if (reduce) return letter;
     final e = _seg(ms, start, 420, BnMotion.entradaExpresiva);
@@ -231,7 +231,7 @@ class _Choreography extends StatelessWidget {
     return Opacity(opacity: e, child: child);
   }
 
-  /// `.nova`: `max-width` 0 → 110 px reveal.
+
   Widget _nova(BuildContext context) {
     final style = _ink.copyWith(fontWeight: FontWeight.w400, color: BnColors.texto2);
     final p = reduce ? 1.0 : _seg(ms, 1050, 460, BnMotion.cambioEstado);
@@ -251,7 +251,7 @@ class _Choreography extends StatelessWidget {
     );
   }
 
-  /// `.tile`: enters in 3D (0–46 %), holds, then scales up and dissolves (77–100 %).
+
   Widget _tile() {
     final enter = _seg(ms, 0, 598, BnMotion.entradaExpresiva);
     final leave = _seg(ms, 1001, 299, BnMotion.estandar);
@@ -294,8 +294,8 @@ class _Choreography extends StatelessWidget {
     );
   }
 
-  /// `.shadow`: 70×12 floor shadow that widens under the tile. The
-  /// `closest-side` ellipse is drawn as a 12 px circle stretched on x.
+
+
   Widget _shadow() {
     final enter = _seg(ms, 0, 598, Curves.ease);
     final leave = _seg(ms, 1001, 299, Curves.ease);
@@ -317,7 +317,7 @@ class _Choreography extends StatelessWidget {
     );
   }
 
-  /// `.slogan`: in at 1400 ms, holds, fades before the exit.
+
   Widget _slogan() {
     final double opacity;
     final double dy;

@@ -4,8 +4,8 @@ import '../../../../core/design_system/binova_tokens.dart';
 
 enum OperationKind { transfer, pay, topup }
 
-/// Copy of each operation, verbatim from the prototype (`CFG` in
-/// `Transferir.dc.html`).
+
+
 class OperationCopy {
   const OperationCopy({
     required this.kind,
@@ -95,11 +95,11 @@ class OperationCopy {
     cancelQ: '¿Cancelar la recarga?',
   );
 
-  /// "Cambiar servicio" goes back to the list; "Cambiar monto" to the amount.
+
   bool get changeGoesToPick => kind == OperationKind.pay;
 }
 
-/// A row of the selection list (contact, service or phone line).
+
 class OperationTarget {
   const OperationTarget({
     required this.id,
@@ -116,22 +116,22 @@ class OperationTarget {
   final String name;
   final String subtitle;
 
-  /// Text shown inside the 44 pt avatar when there is no [icon].
+
   final String? initials;
 
-  /// Inline SVG for service / phone rows.
+
   final String? icon;
 
-  /// Overrides the text of the compact avatar (services show their initial).
+
   final String? compactLabel;
   final Color background;
   final Color foreground;
 
-  /// Text used in the compact 28 pt avatar of the amount header
-  /// (`to.ini` in the prototype).
+
+
   String get compactInitials => compactLabel ?? initials ?? '·';
 
-  /// Avatar colors of the prototype contacts list, by position.
+
   static (Color, Color) paletteAt(int index) => switch (index) {
         0 => (BnColors.grafito, BnColors.blancoCalido),
         1 => (BnColors.brandNaranjaTinte, BnColors.brandNaranjaTexto),

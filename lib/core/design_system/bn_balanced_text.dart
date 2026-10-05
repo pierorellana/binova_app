@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 
-/// CSS `text-wrap: balance`: keeps the line count of a normal wrap but picks
-/// the narrowest width that still fits, so lines end up similar in length
-/// ("Todo tu banco, / en un solo lugar." instead of "…, en un / solo lugar.").
+
+
+
 class BnBalancedText extends StatelessWidget {
   const BnBalancedText(this.text, {required this.style, this.textAlign = TextAlign.start, super.key});
 

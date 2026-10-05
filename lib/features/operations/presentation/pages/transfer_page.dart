@@ -13,7 +13,7 @@ import '../widgets/operation_copy.dart';
 import '../widgets/operation_flow_view.dart';
 import '../widgets/operation_parts.dart';
 
-/// Transferir: contacto → monto con teclado → confirmación → Face ID → resultado.
+
 class TransferPage extends StatefulWidget {
   const TransferPage({super.key});
 

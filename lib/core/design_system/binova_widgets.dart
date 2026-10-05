@@ -18,9 +18,9 @@ export 'bn_sheet.dart';
 export 'bn_shell.dart';
 export 'bn_svg.dart';
 
-/// Primitive visual components shared by the mobile prototype screens.
-/// Keeping these in one place prevents individual features from drifting away
-/// from the iOS-oriented BInova visual language.
+
+
+
 class BnAssetIcon extends StatelessWidget {
   const BnAssetIcon(
     this.name, {

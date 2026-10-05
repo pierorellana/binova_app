@@ -11,9 +11,9 @@ import '../widgets/bn_compact_button.dart';
 TextStyle _text(double size, {FontWeight weight = FontWeight.w400, Color color = BnColors.carbon, double? spacing}) =>
     TextStyle(fontFamily: BnType.family, fontSize: size, fontWeight: weight, color: color, letterSpacing: spacing);
 
-/// Face ID unlock (`FaceID.dc.html`). Home waits blurred behind a light veil
-/// while the BInova HUD runs idle → scan → ok/err. The scan lasts as long as
-/// the real system prompt (never shorter than the prototype's 1.5 s).
+
+
+
 class BiometricPage extends StatefulWidget {
   const BiometricPage({super.key});
 
@@ -26,8 +26,8 @@ class _BiometricPageState extends State<BiometricPage> with SingleTickerProvider
   static const _minScan = Duration(milliseconds: 1500);
   static const _successHold = Duration(milliseconds: 1100);
 
-  /// Message the controller uses when the biometric check itself is rejected;
-  /// any other failure (expired session, unavailable sensor…) is shown as is.
+
+
   static const _rejectedMessage = 'No pudimos validar tu identidad.';
 
   late final AnimationController _reveal = AnimationController(vsync: this, duration: const Duration(milliseconds: 420));
@@ -235,12 +235,12 @@ class _Messages extends StatelessWidget {
     );
   }
 
-  /// `.msg { animation: up 260ms cubic-bezier(.2,.8,.2,1) }`.
+
   static Widget _msg(Widget child) => BnRise(duration: const Duration(milliseconds: 260), offset: 6, child: child);
 }
 
-/// The session's Home, blurred behind the HUD. Amounts are drawn as
-/// silhouettes: real balances are only loaded after the unlock.
+
+
 class _HomeSilhouette extends StatelessWidget {
   const _HomeSilhouette({required this.top, required this.name});
 

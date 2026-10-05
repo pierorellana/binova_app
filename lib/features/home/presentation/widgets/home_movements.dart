@@ -4,7 +4,7 @@ import '../../../../core/design_system/binova_widgets.dart';
 import '../../../transactions/domain/entities/transaction.dart';
 import 'home_data.dart';
 
-/// "Movimientos": the three latest movements of the main account.
+
 class HomeMovements extends StatelessWidget {
   const HomeMovements({
     required this.data,

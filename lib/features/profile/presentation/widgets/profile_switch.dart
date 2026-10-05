@@ -2,9 +2,9 @@ import 'package:flutter/widgets.dart';
 
 import '../../../../core/design_system/binova_widgets.dart';
 
-/// iOS switch from `Perfil.dc.html`: 51×31 track (`#FF9000` / `#E4E1DB`),
-/// 27 pt white knob that slides 20 pt with `.knob` 260 ms cubic-bezier(.2,.8,.2,1).
-/// The Face ID row animates its track over 260 ms, the sheet switches over 220 ms.
+
+
+
 class ProfileSwitch extends StatelessWidget {
   const ProfileSwitch({
     required this.value,

@@ -22,8 +22,8 @@ final _checkGlyph = bnLine('<path d="M5 12.5l4.5 4.5L19 7.5"/>', stroke: 2.2);
 TextStyle _text(double size, {FontWeight weight = FontWeight.w400, Color color = BnColors.carbon, double? height, double? spacing}) =>
     TextStyle(fontFamily: BnType.family, fontSize: size, fontWeight: weight, color: color, height: height, letterSpacing: spacing);
 
-/// Login (`Login.dc.html`): credentials card, inline error with shake,
-/// password recovery sheet and the Face ID entry point.
+
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordFocus = FocusNode();
   bool _showPassword = false;
   String? _validationError;
-  // Starts dismissed so a failure from another screen (e.g. Face ID) is not shown here.
+
   bool _errorDismissed = true;
   int _shake = 0;
 
@@ -250,7 +250,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-/// 52 pt isotipo tile: "BI" over the orange bar.
+
 class _AppMark extends StatelessWidget {
   const _AppMark();
 
@@ -277,7 +277,7 @@ class _AppMark extends StatelessWidget {
       );
 }
 
-/// `.field`: 12/500 label over a 17 pt input; `#FBFAF8` while focused.
+
 class _Field extends StatefulWidget {
   const _Field({
     required this.label,
@@ -410,7 +410,7 @@ class _ErrorBanner extends StatelessWidget {
       );
 }
 
-/// Primary 54 pt button whose busy state shows the `.mini-trace` loader.
+
 class _PrimaryButton extends StatelessWidget {
   const _PrimaryButton({required this.busy, required this.busyLabel, required this.label, required this.onTap});
 
@@ -443,7 +443,7 @@ class _PrimaryButton extends StatelessWidget {
 
 enum _RecoveryStep { form, sending, sent }
 
-/// "Recuperar contraseña" sheet: form → sending (1.1 s) → sent.
+
 class _RecoverySheet extends StatefulWidget {
   const _RecoverySheet();
 

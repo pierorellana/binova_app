@@ -5,7 +5,7 @@ import '../../../accounts/domain/entities/account.dart';
 import 'operation_copy.dart';
 import 'operation_motion.dart';
 
-/// Geist text style shorthand for the operation screens.
+
 TextStyle opStyle(
   double size, {
   FontWeight weight = FontWeight.w400,
@@ -24,7 +24,7 @@ TextStyle opStyle(
       fontFeatures: tabular ? BnType.tabular : null,
     );
 
-/// "Ahorros **** 4821" — how the prototype names a source account.
+
 String accountLabel(Account account) {
   final type = switch (account.type) {
     AccountType.savings => 'Ahorros',
@@ -34,8 +34,8 @@ String accountLabel(Account account) {
   return '$type ${account.maskedNumber}';
 }
 
-/// Source account of an operation: the first active savings account, else
-/// the first active one.
+
+
 Account? operationSource(List<Account> accounts) {
   final active = accounts.where((a) => a.status == AccountStatus.active).toList();
   if (active.isEmpty) return null;
@@ -60,7 +60,7 @@ abstract final class OpGlyphs {
       '<circle cx="22" cy="22" r="21.5" stroke="#A8A59E" stroke-width="1" stroke-dasharray="3 3"/></svg>';
 }
 
-/// 44 pt bar laid out with `justify-content: space-between`.
+
 class OperationNavRow extends StatelessWidget {
   const OperationNavRow({required this.leading, required this.center, required this.trailing, super.key});
 
@@ -149,7 +149,7 @@ class OperationSearchField extends StatelessWidget {
       );
 }
 
-/// `h2` list title: 13/600 uppercase, +0.04em.
+
 class OperationListTitle extends StatelessWidget {
   const OperationListTitle(this.text, {super.key});
 
@@ -258,7 +258,7 @@ class OperationTargetSkeleton extends StatelessWidget {
       );
 }
 
-/// Disabled "Nuevo destinatario · PRÓXIMAMENTE" row.
+
 class OperationComingSoonRow extends StatelessWidget {
   const OperationComingSoonRow({required this.label, super.key});
 
@@ -306,7 +306,7 @@ class OperationComingSoonRow extends StatelessWidget {
       );
 }
 
-/// Amount-step header: compact avatar + name + subtitle.
+
 class OperationRecipientHeader extends StatelessWidget {
   const OperationRecipientHeader({required this.target, super.key});
 
@@ -333,7 +333,7 @@ class OperationRecipientHeader extends StatelessWidget {
       );
 }
 
-/// "Desde Ahorros **** 4821 · Disponible $3,840.20".
+
 class OperationSourceCard extends StatelessWidget {
   const OperationSourceCard({required this.account, required this.loading, this.error, super.key});
 
@@ -381,7 +381,7 @@ class OperationSourceCard extends StatelessWidget {
   }
 }
 
-/// White card of label/value rows (confirmation `dl`).
+
 class OperationDetailCard extends StatelessWidget {
   const OperationDetailCard({required this.rows, super.key});
 
@@ -429,7 +429,7 @@ class OperationDetailRow extends StatelessWidget {
       );
 }
 
-/// 13/600 status label with a 14 pt glyph (`.lbl`).
+
 class OperationStatusLabel extends StatelessWidget {
   const OperationStatusLabel({required this.icon, required this.label, required this.color, super.key});
 
@@ -448,7 +448,7 @@ class OperationStatusLabel extends StatelessWidget {
       );
 }
 
-/// `.mini-trace`: 18 pt rounded square with an orange dash running around it.
+
 class OperationMiniTrace extends StatefulWidget {
   const OperationMiniTrace({super.key});
 
@@ -495,7 +495,7 @@ class _MiniTracePainter extends CustomPainter {
     canvas.drawRRect(rrect, base);
     final metric = (Path()..addRRect(rrect)).computeMetrics().first;
     final len = metric.length;
-    // stroke-dasharray: 22 78 on pathLength 100, offset runs −100 per loop.
+
     final start = (t * len) % len;
     final dash = len * .22;
     final paint = Paint()

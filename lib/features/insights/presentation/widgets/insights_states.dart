@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import '../../../../core/design_system/binova_widgets.dart';
 
-/// `Estado-SinConexion` banner: cached data is on screen.
+
 class InsightsOfflineBanner extends StatelessWidget {
   const InsightsOfflineBanner({required this.fetchedAt, required this.onRetry, super.key});
 
@@ -77,7 +77,7 @@ class InsightsOfflineBanner extends StatelessWidget {
       );
 }
 
-/// `.empty` pattern from `Estado-Vacio`: ringed glyph, title, body, outline action.
+
 class InsightsMessageState extends StatelessWidget {
   const InsightsMessageState({
     required this.glyph,
@@ -154,7 +154,7 @@ class InsightsMessageState extends StatelessWidget {
       );
 }
 
-/// `.sk` placeholders laid out like the loaded Insights content.
+
 class InsightsSkeleton extends StatelessWidget {
   const InsightsSkeleton({super.key});
 

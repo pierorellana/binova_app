@@ -7,8 +7,8 @@ import 'profile_switch.dart';
 
 enum ProfileSheet { datos, seguridad, dispositivos, notificaciones, preferencias }
 
-/// Settings that the prototype toggles but no API persists yet; kept for the
-/// session so the sheets remember them while the profile is open.
+
+
 class ProfileLocalSwitches extends ChangeNotifier {
   bool faceIdPerOperation = true;
   bool accessAlerts = true;
@@ -20,7 +20,7 @@ class ProfileLocalSwitches extends ChangeNotifier {
   }
 }
 
-/// Opens one of the profile sheets (`.sheet` 440 ms spring + `.dim`).
+
 Future<void> showProfileSheet(
   BuildContext context, {
   required ProfileSheet sheet,
@@ -35,8 +35,8 @@ Future<void> showProfileSheet(
       ),
     );
 
-/// Log-out confirmation (`role="alertdialog"`): iOS action sheet with the
-/// critical action. Resolves to `true` when the user confirms.
+
+
 Future<bool> showLogoutSheet(BuildContext context) async {
   final confirmed = await showBnSheet<bool>(
     context,
@@ -173,14 +173,14 @@ class _ProfileSheetBody extends StatelessWidget {
   }
 }
 
-/// `p*******@viamatica.com`
+
 String maskEmail(String email) {
   final at = email.indexOf('@');
   if (at <= 1) return email;
   return '${email[0]}${'*' * (at - 1)}${email.substring(at)}';
 }
 
-/// `.kv` rows: 52 pt min height, `#EFEDE9` separators except the last one.
+
 class _KvList extends StatelessWidget {
   const _KvList(this.rows);
 
@@ -339,8 +339,8 @@ class _LogoutSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // The sheet frame reserves safe area + 10 pt below the content; the
-    // prototype sits the action sheet 34 pt from the bottom edge.
+
+
     final inset = MediaQuery.paddingOf(context).bottom;
     final nudge = inset > 0 ? (inset + 10 - 34).clamp(0.0, 10.0) : 0.0;
     return Transform.translate(

@@ -23,8 +23,8 @@ abstract final class BinovaTheme {
 
     return ThemeData(
       useMaterial3: true,
-      // BInova targets iOS: Cupertino physics, transitions and text behavior
-      // on every platform so previews match the device.
+
+
       platform: TargetPlatform.iOS,
       splashFactory: NoSplash.splashFactory,
       highlightColor: Colors.transparent,
@@ -71,8 +71,8 @@ abstract final class BinovaTheme {
           color: BinovaColors.muted,
         ),
       ),
-      // Inputs are drawn by each screen (prototype fields have no Material
-      // chrome): no fill, no border, no extra padding.
+
+
       inputDecorationTheme: const InputDecorationTheme(
         filled: false,
         isDense: true,

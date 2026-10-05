@@ -18,8 +18,8 @@ class OperationFlowController extends ChangeNotifier {
   FinancialOperation? operation;
   String? errorMessage;
 
-  /// True when the last [submit] stopped at the biometric step (nothing was
-  /// sent), so the UI can offer the Face ID fallback instead of a result.
+
+
   bool authenticationFailed = false;
   String _idempotencyKey = '';
 
@@ -72,7 +72,7 @@ class OperationFlowController extends ChangeNotifier {
     }
   }
 
-  /// Starts a new, independent operation (new idempotency key).
+
   void reset() {
     status = OperationFlowStatus.idle;
     operation = null;

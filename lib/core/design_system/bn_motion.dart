@@ -5,8 +5,8 @@ import 'package:flutter/widgets.dart';
 
 import 'binova_tokens.dart';
 
-/// True when the user enabled iOS "Reduce Motion". Every animation in the
-/// prototype degrades to a 200 ms fade in that case.
+
+
 bool bnReduceMotion(BuildContext context) =>
     MediaQuery.maybeDisableAnimationsOf(context) ?? false;
 
@@ -21,7 +21,7 @@ abstract final class BnHaptics {
   }
 }
 
-/// `.press:active { transform: scale(.97); opacity: .86 }` from the prototype.
+
 class BnPressable extends StatefulWidget {
   const BnPressable({
     required this.child,
@@ -90,7 +90,7 @@ class _BnPressableState extends State<BnPressable> {
   }
 }
 
-/// `.row:active { background: #F1EFEB }` — list rows that tint on press.
+
 class BnRowPressable extends StatefulWidget {
   const BnRowPressable({
     required this.child,
@@ -151,8 +151,8 @@ class _BnRowPressableState extends State<BnRowPressable> {
   }
 }
 
-/// `.st { animation: rise 340ms cubic-bezier(.2,.8,.2,1) both }` with an
-/// optional `animation-delay`. Used for staggered screen entrances.
+
+
 class BnRise extends StatefulWidget {
   const BnRise({
     required this.child,
@@ -214,8 +214,8 @@ class _BnRiseState extends State<BnRise> with SingleTickerProviderStateMixin {
   }
 }
 
-/// Plays the prototype's `shake` keyframes whenever [trigger] changes.
-/// `0,100% → 0 · 20% → -a · 40% → +0.8a · 60% → -0.4a · 80% → +0.2a`
+
+
 class BnShake extends StatefulWidget {
   const BnShake({
     required this.child,
@@ -278,7 +278,7 @@ class _BnShakeState extends State<BnShake> with SingleTickerProviderStateMixin {
       );
 }
 
-/// Counts a number up from zero (650 ms, ease-out cubic, 120 ms delay).
+
 class BnCountUp extends StatefulWidget {
   const BnCountUp({
     required this.value,
@@ -336,7 +336,7 @@ class _BnCountUpState extends State<BnCountUp> with SingleTickerProviderStateMix
   }
 }
 
-/// `.sk` shimmer skeleton block: linear-gradient sweep, 1400 ms ease-in-out.
+
 class BnSkeleton extends StatefulWidget {
   const BnSkeleton({this.width, this.height = 12, this.radius = 6, this.circle = false, super.key});
 
@@ -366,7 +366,7 @@ class _BnSkeletonState extends State<BnSkeleton> with SingleTickerProviderStateM
       animation: _c,
       builder: (context, _) {
         final p = reduce ? 0.5 : Curves.easeInOut.transform(_c.value);
-        // background-position: 120% → -20% over a 300% wide gradient.
+
         final pos = 1.2 - 1.4 * p;
         return Container(
           width: widget.circle ? widget.height : widget.width,
@@ -395,7 +395,7 @@ class _ShimmerTransform extends GradientTransform {
   Matrix4 transform(Rect bounds, {TextDirection? textDirection}) {
     final w = bounds.width;
     final offset = (w - 3 * w) * position;
-    // x' = left + offset + 3·(x − left)
+
     return Matrix4.identity()
       ..translate(bounds.left + offset, 0.0)
       ..scale(3.0, 1.0, 1.0)
@@ -403,7 +403,7 @@ class _ShimmerTransform extends GradientTransform {
   }
 }
 
-/// Animated stroke "draw-on" of a path (stroke-dashoffset 1 → 0).
+
 class BnPathDraw extends CustomPainter {
   BnPathDraw({required this.path, required this.progress, required this.color, required this.strokeWidth, this.viewBox = 24});
 

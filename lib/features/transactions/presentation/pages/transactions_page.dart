@@ -20,7 +20,7 @@ enum _Filter { all, income, expense }
 
 const _toastDuration = Duration(milliseconds: 2400);
 
-/// Movimientos (Movimientos.dc.html) and its empty state (Estado-Vacio.dc.html).
+
 class TransactionsPage extends StatefulWidget {
   const TransactionsPage({
     required this.accountId,
@@ -32,10 +32,10 @@ class TransactionsPage extends StatefulWidget {
 
   final String accountId;
 
-  /// Back label; defaults to the account type ("Ahorros"), as when pushed from Cuenta.
+
   final String? backLabel;
 
-  /// Opens this movement's detail sheet as soon as the list loads.
+
   final String? initialTransactionId;
   final BnTab tab;
 
@@ -300,7 +300,7 @@ class _Header extends StatelessWidget {
       );
 }
 
-/// Fills the viewport between the header and the tab bar (`flex: 1` centering).
+
 class _FillRemaining extends StatelessWidget {
   const _FillRemaining({required this.child});
 
@@ -349,7 +349,7 @@ class _SearchField extends StatelessWidget {
       );
 }
 
-/// `role="tablist"` segmented filter: 14 pt labels, `.seg` 220 ms transitions.
+
 class _FilterControl extends StatelessWidget {
   const _FilterControl({required this.value, required this.onChanged});
 
@@ -490,8 +490,8 @@ class _SkeletonRow extends StatelessWidget {
       );
 }
 
-/// Standalone movement detail (opened from Inicio / Avisos). Same visual as
-/// the Movimientos sheet, laid out on a full white surface.
+
+
 class TransactionDetailPage extends StatefulWidget {
   const TransactionDetailPage({required this.transactionId, super.key});
 

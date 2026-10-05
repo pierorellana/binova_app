@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import '../../../../core/design_system/binova_widgets.dart';
 
-/// "Más servicios": upcoming BInova services + connected services.
+
 Future<void> showHomeMoreServices(BuildContext context, {required VoidCallback onExchange}) => showBnSheet<void>(
       context,
       builder: (sheetContext) => _MoreServices(

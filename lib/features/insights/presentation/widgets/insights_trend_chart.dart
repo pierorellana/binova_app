@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import '../../../../core/design_system/binova_widgets.dart';
 
-/// One column of the monthly spending chart.
+
 class InsightsTrendPoint {
   const InsightsTrendPoint({required this.label, required this.value, required this.current});
 
@@ -11,10 +11,10 @@ class InsightsTrendPoint {
   final bool current;
 }
 
-/// `section[aria-label="Tendencia de gastos por mes"]`: white card, 150 pt
-/// tall six-column grid (gap 14) with bars that grow from the bottom
-/// (`grow 520ms cubic-bezier(.2,.8,.2,1)`). Columns keep the 1/6 width of the
-/// prototype grid and align to the end, so the current month sits on the right.
+
+
+
+
 class InsightsTrendChart extends StatelessWidget {
   const InsightsTrendChart({required this.points, required this.symbol, super.key});
 
@@ -115,7 +115,7 @@ class _Column extends StatelessWidget {
   }
 }
 
-/// `.bar { transform-origin: bottom; animation: grow 520ms cubic-bezier(.2,.8,.2,1) both }`.
+
 class _GrowBar extends StatefulWidget {
   const _GrowBar({required this.height, required this.color});
 

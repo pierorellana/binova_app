@@ -172,7 +172,7 @@ abstract final class _Glyphs {
   static final logout = bnLine('<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l-5-5 5-5"/><path d="M5 12h11"/>', stroke: 1.8);
 }
 
-/// Profile card (`.press` scale .98 / opacity .88) with the 60 pt avatar.
+
 class _HeaderCard extends StatelessWidget {
   const _HeaderCard({required this.name, required this.subtitle, required this.onTap});
 
@@ -244,7 +244,7 @@ class _HeaderCard extends StatelessWidget {
       );
 }
 
-/// Grouped list: uppercase 13/600 heading + white card with inset dividers.
+
 class _Group extends StatelessWidget {
   const _Group({required this.title, required this.rows});
 
@@ -307,7 +307,7 @@ class _Row extends StatelessWidget {
   final Widget? trailing;
   final VoidCallback? onTap;
 
-  /// `#EFEDE9` tile with a carbon glyph instead of the grafito tile.
+
   final bool light;
 
   @override
@@ -407,7 +407,7 @@ class _Footer extends StatelessWidget {
       );
 }
 
-/// `.sk` placeholders shaped like the profile card and the first group.
+
 class _ProfileSkeleton extends StatelessWidget {
   const _ProfileSkeleton();
 
@@ -474,7 +474,7 @@ class _ProfileSkeleton extends StatelessWidget {
       );
 }
 
-/// `Estado-Vacio` style failure with a retry action.
+
 class _FailureState extends StatelessWidget {
   const _FailureState({required this.message, required this.onRetry});
 

@@ -4,10 +4,10 @@ import 'package:flutter/widgets.dart';
 
 import '../../../../core/design_system/binova_widgets.dart';
 
-/// Shared element from `Home.dc.html` (`.xp`): the tapped product row grows
-/// into the account detail header (340 ms, cubic-bezier(.2,.8,.2,1)), then the
-/// detail route is pushed underneath and the overlay fades away once the
-/// route is on screen.
+
+
+
+
 Future<void> playHomeAccountExpansion(
   BuildContext context, {
   required Rect from,
@@ -36,11 +36,11 @@ Future<void> playHomeAccountExpansion(
     ),
   );
   overlay.insert(entry);
-  // Same timeline as the canvas: navigate 360 ms after the tap.
+
   await Future<void>.delayed(const Duration(milliseconds: 360));
   navigate();
-  // The route cross-fades in 120 ms under the overlay; reveal it right after
-  // so the detail's staggered entrance plays, as in the canvas.
+
+
   await Future<void>.delayed(const Duration(milliseconds: 140));
   visible.value = false;
   await Future<void>.delayed(const Duration(milliseconds: 200));
@@ -92,7 +92,7 @@ class _ExpansionState extends State<_Expansion> with SingleTickerProviderStateMi
         builder: (context, _) {
           final t = BnMotion.entrada.transform(_c.value);
           final ease = Curves.ease.transform(_c.value);
-          // Label: opacity 200 ms ease after 120 ms; max-height 340 ms ease.
+
           final labelOpacity = const Interval(120 / 340, 320 / 340, curve: Curves.ease).transform(_c.value);
           double lerp(double a, double b) => a + (b - a) * t;
 

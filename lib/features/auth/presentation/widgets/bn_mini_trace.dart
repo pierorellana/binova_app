@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 
 import '../../../../core/design_system/binova_tokens.dart';
 
-/// `.mini-trace`: the in-button loader of the prototype. A 22 % orange dash
-/// travels around the isotipo outline (`stroke-dasharray: 22 78`, 1.2 s linear).
+
+
 class BnMiniTrace extends StatefulWidget {
   const BnMiniTrace({this.size = 20, super.key});
 

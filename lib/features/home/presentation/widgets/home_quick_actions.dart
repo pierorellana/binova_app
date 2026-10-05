@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 
 import '../../../../core/design_system/binova_widgets.dart';
 
-/// Transferir · Pagar · Recargar · Más. [enabled] false renders the offline
-/// variant (opacity .45, not tappable).
+
+
 class HomeQuickActions extends StatelessWidget {
   const HomeQuickActions({
     required this.onTransfer,

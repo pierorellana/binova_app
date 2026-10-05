@@ -10,7 +10,7 @@ String transactionTitle(Transaction t) => t.merchant ?? t.description;
 
 BnCategory transactionCategory(Transaction t) => BnCategory.of(t.category, incoming: isIncome(t));
 
-/// `−$8.50` / `+$150.00` (U+2212 minus), as `fmt()` in Movimientos.
+
 String transactionAmount(Transaction t) {
   final value = parseAmount(t.amount.amount).abs();
   return BnFormat.money(
@@ -33,9 +33,9 @@ final _exclamation = bnLine('<path d="M12 6v8M12 18h.01"/>', stroke: 2.4);
       TransactionStatus.failed => ('Fallido', BnColors.critico, _exclamation),
     };
 
-/// Movement row (`.row`): round category glyph, name, "Categoría · Hoy, 08:43"
-/// and the signed amount. [compact] is the Cuenta variant (40 pt glyph,
-/// 64 pt row, `#F1EFEB` press); the default is Movimientos (42 / 68 / `#EFEDE9`).
+
+
+
 class TransactionRow extends StatelessWidget {
   const TransactionRow({
     required this.transaction,
@@ -116,7 +116,7 @@ String transactionActionMessage(TransactionDetailAction action) => switch (actio
       TransactionDetailAction.share => 'Comprobante listo para compartir',
     };
 
-/// Opens the movement detail as the prototype's sheet over the list.
+
 Future<TransactionDetailAction?> showTransactionDetailSheet(
   BuildContext context,
   Transaction transaction, {
@@ -135,7 +135,7 @@ Future<TransactionDetailAction?> showTransactionDetailSheet(
       ),
     );
 
-/// Body of the "Detalle del movimiento" sheet (Movimientos.dc.html).
+
 class TransactionDetailContent extends StatelessWidget {
   const TransactionDetailContent({
     required this.transaction,

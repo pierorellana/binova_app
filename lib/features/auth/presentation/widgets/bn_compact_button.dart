@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import '../../../../core/design_system/binova_tokens.dart';
 import '../../../../core/design_system/bn_motion.dart';
 
-/// Hugging primary button of the access flow
-/// (`height: 46px; padding: 0 22px; border-radius: 14px; 16/600`).
+
+
 class BnCompactButton extends StatelessWidget {
   const BnCompactButton({required this.label, required this.onTap, super.key});
 

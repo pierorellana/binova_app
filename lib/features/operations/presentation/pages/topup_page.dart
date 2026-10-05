@@ -12,7 +12,7 @@ import '../widgets/operation_flow_view.dart';
 import '../widgets/operation_motion.dart';
 import '../widgets/operation_parts.dart';
 
-/// Recargar: número → monto (chips) → confirmación → Face ID → resultado.
+
 class TopupPage extends StatefulWidget {
   const TopupPage({super.key});
 
@@ -20,8 +20,8 @@ class TopupPage extends StatefulWidget {
   State<TopupPage> createState() => _TopupPageState();
 }
 
-/// A saved phone line. There is no saved-lines endpoint yet, so the list
-/// mirrors the prototype.
+
+
 class _Line {
   const _Line(this.operatorId, this.lineNumber, this.target);
 
@@ -145,7 +145,7 @@ class _TopupPageState extends State<TopupPage> {
       );
 }
 
-/// 3-column radio grid of 64 pt chips (`.chip`: scale .96 while pressed).
+
 class _AmountChips extends StatelessWidget {
   const _AmountChips({required this.selected, required this.onSelect});
 

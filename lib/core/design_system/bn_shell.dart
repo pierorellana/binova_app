@@ -10,8 +10,8 @@ import 'bn_svg.dart';
 
 enum BnTab { home, products, insights, profile }
 
-/// Route names for each tab. Kept here (instead of importing the router) so
-/// the design system has no dependency on features.
+
+
 const bnTabRoutes = <BnTab, String>{
   BnTab.home: '/home',
   BnTab.products: '/accounts',
@@ -29,10 +29,10 @@ const _darkStatusBar = SystemUiOverlayStyle(
   systemNavigationBarContrastEnforced: false,
 );
 
-/// iOS-style scroll: bounce at the edges, momentum, always scrollable.
+
 const bnScrollPhysics = BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics());
 
-/// Top inset as the prototype lays it out: 59 pt on Dynamic Island iPhones.
+
 double bnTopInset(BuildContext context) {
   final top = MediaQuery.paddingOf(context).top;
   return top > 0 ? top : 20;
@@ -40,8 +40,8 @@ double bnTopInset(BuildContext context) {
 
 double bnBottomInset(BuildContext context) => MediaQuery.paddingOf(context).bottom;
 
-/// Full-screen page with the warm white ground and light status bar.
-/// The body is responsible for its own top inset (use [bnTopInset]).
+
+
 class BnScreen extends StatelessWidget {
   const BnScreen({
     required this.child,
@@ -67,8 +67,8 @@ class BnScreen extends StatelessWidget {
       );
 }
 
-/// Tab-level screen: scrolling content under a frosted tab bar
-/// (`padding: 59px 0 112px` in the prototype) plus optional overlays.
+
+
 class BnTabScaffold extends StatelessWidget {
   const BnTabScaffold({
     required this.tab,
@@ -111,7 +111,7 @@ class BnTabScaffold extends StatelessWidget {
   }
 }
 
-/// Thin wrapper so tab screens can offer pull-to-refresh with the iOS spinner.
+
 class CupertinoSliverRefreshControlCompat extends StatelessWidget {
   const CupertinoSliverRefreshControlCompat({required this.onRefresh, super.key});
 
@@ -121,7 +121,7 @@ class CupertinoSliverRefreshControlCompat extends StatelessWidget {
   Widget build(BuildContext context) => CupertinoSliverRefreshControl(onRefresh: onRefresh);
 }
 
-/// Frosted tab bar: `rgba(250,249,247,.9)` + `blur(20px)` + hairline top.
+
 class BnTabBar extends StatelessWidget {
   const BnTabBar({required this.current, super.key});
 
@@ -204,7 +204,7 @@ class BnTabBar extends StatelessWidget {
   }
 }
 
-/// iOS navigation bar row (44 pt): `‹ Back` · centered title · trailing.
+
 class BnNavBar extends StatelessWidget {
   const BnNavBar({this.backLabel, this.onBack, this.title, this.trailing, this.showBack = true, super.key});
 
@@ -275,7 +275,7 @@ class BnBackButton extends StatelessWidget {
       );
 }
 
-/// Text action in the nav bar (e.g. "Marcar leídas").
+
 class BnNavTextButton extends StatelessWidget {
   const BnNavTextButton({required this.label, this.onTap, super.key});
 
@@ -298,7 +298,7 @@ class BnNavTextButton extends StatelessWidget {
       );
 }
 
-/// 34/600 large title with 20 pt side margins.
+
 class BnLargeTitle extends StatelessWidget {
   const BnLargeTitle(this.text, {this.padding = const EdgeInsets.symmetric(horizontal: 20), super.key});
 
@@ -312,7 +312,7 @@ class BnLargeTitle extends StatelessWidget {
       );
 }
 
-/// Section header: `h2 20/600 −0.02em` with optional "Ver todos" link.
+
 class BnSectionHeader extends StatelessWidget {
   const BnSectionHeader(this.title, {this.subtitle, this.action, this.onAction, super.key});
 
@@ -355,7 +355,7 @@ class BnSectionHeader extends StatelessWidget {
 
 enum BnButtonVariant { primary, secondary, ghost, disabled }
 
-/// Buttons: primary `54 / r16 / #141518 / 17·600`, secondary white + hairline.
+
 class BnButton extends StatelessWidget {
   const BnButton({
     required this.label,
@@ -426,7 +426,7 @@ class BnButton extends StatelessWidget {
   }
 }
 
-/// iOS segmented control (`#EBE9E4` track, white selected pill).
+
 class BnSegmented<T> extends StatelessWidget {
   const BnSegmented({required this.items, required this.value, required this.onChanged, super.key});
 
@@ -487,7 +487,7 @@ class BnSegmented<T> extends StatelessWidget {
       );
 }
 
-/// White card with hairline border and radius 18 (`.card` in the prototype).
+
 class BnCard extends StatelessWidget {
   const BnCard({required this.child, this.padding, this.radius = 18, this.color = BnColors.superficie, this.border = true, super.key});
 
@@ -510,7 +510,7 @@ class BnCard extends StatelessWidget {
       );
 }
 
-/// Rounded icon tile (40×40, radius 12, `#EFEDE9`).
+
 class BnIconTile extends StatelessWidget {
   const BnIconTile({
     required this.svg,
@@ -545,7 +545,7 @@ class BnIconTile extends StatelessWidget {
       );
 }
 
-/// Hairline divider with optional left inset (`margin-left: 68px`).
+
 class BnDivider extends StatelessWidget {
   const BnDivider({this.indent = 0, this.color = BnColors.relleno, super.key});
 
@@ -559,7 +559,7 @@ class BnDivider extends StatelessWidget {
       );
 }
 
-/// Grafito avatar with initials (44 pt on Home).
+
 class BnInitialsAvatar extends StatelessWidget {
   const BnInitialsAvatar({required this.initials, this.size = 44, this.fontSize = 15, super.key});
 

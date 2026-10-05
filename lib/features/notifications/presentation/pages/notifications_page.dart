@@ -8,7 +8,7 @@ import '../providers/notifications_controller.dart';
 
 enum _Filter { all, financial, security, informational }
 
-/// Visual identity of each notification category (`CAT` in the canvas).
+
 class _Category {
   const _Category(this.label, this.background, this.foreground, this.icon);
 
@@ -53,7 +53,7 @@ class NotificationsPage extends StatefulWidget {
 class _NotificationsPageState extends State<NotificationsPage> {
   _Filter _filter = _Filter.all;
 
-  /// Security prompts answered with "Sí, fui yo" during this session.
+
   final Set<String> _confirmed = <String>{};
 
   @override
@@ -76,7 +76,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
     try {
       await controller.markAllRead();
     } on Object {
-      // The list keeps its previous state; the user can retry.
+
     }
   }
 
@@ -182,7 +182,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
     try {
       await controller.markRead(n.id);
     } on Object {
-      // Navigation should not depend on the read receipt.
+
     }
   }
 
@@ -205,9 +205,9 @@ class _NotificationsPageState extends State<NotificationsPage> {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Grouping: "Hoy" · "Ayer" · "Esta semana" · "Anteriores"
-// ---------------------------------------------------------------------------
+
+
+
 
 class _Group {
   _Group(this.title);
@@ -236,8 +236,8 @@ List<_Group> _group(Iterable<AppNotification> items) {
     final group = groups.where((g) => g.title == title).firstOrNull ?? (groups..add(_Group(title))).last;
     group.items.add(n);
   }
-  // Unread security alerts lead their day (as in the prototype); the rest
-  // keep the API's newest-first order.
+
+
   bool leads(AppNotification n) => n.type == NotificationType.security && !n.read;
   for (final g in groups) {
     final ordered = [...g.items.where(leads), ...g.items.where((n) => !leads(n))];
@@ -256,11 +256,11 @@ String _timeLabel(DateTime created) {
   return '${d.day} ${BnFormat.monthsShort[d.month - 1]}';
 }
 
-/// "¿Fuiste tú?" security prompts get the confirm / deny actions.
+
 bool _asksConfirmation(AppNotification n) =>
     n.type == NotificationType.security && (n.resourceType == 'session' || n.body.contains('¿Fuiste tú?'));
 
-/// Trailing link of a notification (`act` + `href` in the canvas).
+
 class _Link {
   const _Link(this.label, this.route, [this.argument]);
 
@@ -288,9 +288,9 @@ class _Link {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Widgets
-// ---------------------------------------------------------------------------
+
+
+
 
 class _GroupSection extends StatelessWidget {
   const _GroupSection({
@@ -576,7 +576,7 @@ class _LinkButton extends StatelessWidget {
       );
 }
 
-/// Offline / error banner (`.banner` in `Estado-SinConexion`).
+
 class _NoticeBanner extends StatelessWidget {
   const _NoticeBanner({required this.title, required this.body, required this.onRetry, this.footnote});
 

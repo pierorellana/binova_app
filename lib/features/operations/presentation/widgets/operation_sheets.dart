@@ -6,8 +6,8 @@ import 'package:flutter/services.dart';
 import '../../../../core/design_system/binova_widgets.dart';
 import 'operation_parts.dart';
 
-/// Comprobante sheet (`role="dialog"`): wordmark, amount, dashed divider and
-/// the confirmation rows plus date and reference.
+
+
 Future<void> showOperationReceipt(
   BuildContext context, {
   required String title,
@@ -79,7 +79,7 @@ class _Receipt extends StatelessWidget {
       );
 }
 
-/// `border-top: 1px dashed #D6D2CA`.
+
 class _DashedLine extends CustomPainter {
   const _DashedLine();
 
@@ -97,8 +97,8 @@ class _DashedLine extends CustomPainter {
   bool shouldRepaint(covariant _DashedLine oldDelegate) => false;
 }
 
-/// iOS action sheet shown when cancelling with data entered.
-/// Resolves to `true` when the user chooses "Descartar".
+
+
 Future<bool> showCancelOperationSheet(BuildContext context, {required String question}) async {
   final result = await showGeneralDialog<bool>(
     context: context,
@@ -125,7 +125,7 @@ class _CancelSheet extends StatelessWidget {
     return AnimatedBuilder(
       animation: animation,
       builder: (context, child) {
-        // dimIn 300 ms ease; sheetIn 440 ms spring.
+
         final dim = Curves.ease.transform((animation.value * 440 / 300).clamp(0.0, 1.0));
         final slide = BnMotion.springSuave.transform(animation.value);
         return Stack(

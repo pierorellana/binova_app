@@ -25,7 +25,7 @@ class InsightCategory {
   }
 }
 
-/// Spending of one period in the trend (`trend[]`, oldest first).
+
 class InsightTrendPoint {
   const InsightTrendPoint({required this.start, required this.totalExpense});
 
@@ -65,7 +65,7 @@ class Insights {
   final String? comparisonPercentage;
   final List<InsightCategory> categories;
 
-  /// Optional: older API versions don't send it.
+
   final List<InsightTrendPoint> trend;
 
   factory Insights.fromMap(Map<String, dynamic> map) {

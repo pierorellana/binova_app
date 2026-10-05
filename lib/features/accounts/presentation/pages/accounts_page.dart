@@ -26,9 +26,9 @@ const _cardAmount = TextStyle(
   fontFeatures: BnType.tabular,
 );
 
-// ---------------------------------------------------------------------------
-// Productos (Productos.dc.html)
-// ---------------------------------------------------------------------------
+
+
+
 
 class AccountsPage extends StatefulWidget {
   const AccountsPage({super.key});
@@ -171,8 +171,8 @@ class _Section extends StatelessWidget {
       );
 }
 
-/// White product card with the Productos `.press` (scale .98 · opacity .9).
-/// Productos lists the credit card first, then debit, then virtual cards.
+
+
 List<cards.Card> _sortedCards(List<cards.Card> list) {
   int rank(cards.Card c) => switch (c.type) {
         cards.CardType.credit => 0,
@@ -273,7 +273,7 @@ class _BankCardTile extends StatelessWidget {
 
   final cards.Card card;
 
-  /// The credit line behind a credit card: available + used = limit.
+
   final Account? creditAccount;
 
   @override
@@ -443,13 +443,13 @@ class _CardSkeleton extends StatelessWidget {
       );
 }
 
-// ---------------------------------------------------------------------------
-// Detalle de cuenta (Cuenta.dc.html)
-// ---------------------------------------------------------------------------
 
-/// Account detail. Its header ("Cuenta · **** 4821" 15 pt, "Saldo disponible"
-/// 13 pt, 42 pt amount starting at 123 pt) is the landing state of the Inicio
-/// row expansion, so it does not animate in; the rest rises (`.st`).
+
+
+
+
+
+
 class AccountDetailPage extends StatefulWidget {
   const AccountDetailPage({
     required this.accountId,
@@ -845,7 +845,7 @@ class _IconButton extends StatelessWidget {
       );
 }
 
-/// "Últimos movimientos": the two latest movements or the dashed empty box.
+
 class _RecentTransactions extends StatelessWidget {
   const _RecentTransactions({required this.controller, required this.onSeeAll, required this.onOpen});
 

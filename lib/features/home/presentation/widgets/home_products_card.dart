@@ -4,11 +4,11 @@ import '../../../../core/design_system/binova_widgets.dart';
 import '../../../accounts/domain/entities/account.dart';
 import 'home_data.dart';
 
-/// Tapped product row with its global rect (for the shared-element expansion).
+
 typedef HomeProductTap = void Function(Account account, Rect rowRect);
 
-/// "Mis productos" card. [onTap] null renders the offline variant
-/// (no "Ver todos", no chevrons, rows not tappable).
+
+
 class HomeProductsCard extends StatelessWidget {
   const HomeProductsCard({
     required this.data,

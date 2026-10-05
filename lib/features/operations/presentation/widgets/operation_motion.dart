@@ -5,8 +5,8 @@ import '../../../../core/design_system/bn_motion.dart';
 
 enum StepDirection { fwd, back }
 
-/// Plays a one-shot entrance when mounted. Give it a new key to replay.
-/// Reduce Motion turns every variant into a 200 ms fade.
+
+
 abstract class OperationEntrance extends StatefulWidget {
   const OperationEntrance({required this.child, super.key});
 
@@ -49,7 +49,7 @@ class _OneShotState extends State<OperationEntrance> with SingleTickerProviderSt
   }
 }
 
-/// `.fwd` / `.back`: hierarchical step push, slide 28 px + fade, 280 ms.
+
 class OperationStepIn extends OperationEntrance {
   const OperationStepIn({required this.direction, required super.child, super.key});
 
@@ -71,7 +71,7 @@ class OperationStepIn extends OperationEntrance {
       );
 }
 
-/// `.fade`: 300 ms ease fade-in.
+
 class OperationFadeIn extends OperationEntrance {
   const OperationFadeIn({required super.child, super.key});
 
@@ -85,7 +85,7 @@ class OperationFadeIn extends OperationEntrance {
   Widget transform(BuildContext context, double t, Widget child) => Opacity(opacity: t.clamp(0.0, 1.0), child: child);
 }
 
-/// `.pa` / `.pb`: the last typed digit rises 10 px from 90 % scale (180 ms).
+
 class DigitPop extends OperationEntrance {
   const DigitPop({required super.child, super.key});
 
@@ -105,7 +105,7 @@ class DigitPop extends OperationEntrance {
       );
 }
 
-/// `.nudge`: 320 ms horizontal shake (−5, 4, −2) whenever [trigger] changes.
+
 class OperationNudge extends StatefulWidget {
   const OperationNudge({required this.trigger, required this.child, super.key});
 
@@ -153,7 +153,7 @@ class _OperationNudgeState extends State<OperationNudge> with SingleTickerProvid
       );
 }
 
-/// `.key` / `.chip` press: background + scale transition while held.
+
 class PressScale extends StatefulWidget {
   const PressScale({
     required this.builder,
@@ -205,5 +205,5 @@ class _PressScaleState extends State<PressScale> {
       );
 }
 
-/// Rise helper for staggered `.st` children (keeps call sites short).
+
 Widget rise(Widget child, [int delayMs = 0]) => BnRise(delay: Duration(milliseconds: delayMs), child: child);

@@ -5,8 +5,8 @@ import 'operation_copy.dart';
 import 'operation_motion.dart';
 import 'operation_parts.dart';
 
-/// Processing → success / pending / error. The same `.op` indicator morphs
-/// while the copy below it rises in with the prototype's stagger.
+
+
 class OperationResultView extends StatelessWidget {
   const OperationResultView({
     required this.copy,

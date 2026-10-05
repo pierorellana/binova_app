@@ -1,5 +1,5 @@
-/// Money / text formatting that matches the prototype copy:
-/// `$5,430.20`, `−$8.50` (U+2212 minus), `+$150.00`.
+
+
 abstract final class BnFormat {
   static const minus = '−';
 
@@ -12,7 +12,7 @@ abstract final class BnFormat {
     return b.toString();
   }
 
-  /// `1234.5` → `1,234.50`
+
   static String number(num value, {int decimals = 2}) {
     final fixed = value.abs().toStringAsFixed(decimals);
     final parts = fixed.split('.');
@@ -20,7 +20,7 @@ abstract final class BnFormat {
     return decimals == 0 ? integer : '$integer.${parts[1]}';
   }
 
-  /// `$1,234.50` (no sign for positives unless [signed]).
+
   static String money(num value, {String symbol = r'$', bool signed = false, int decimals = 2}) {
     final body = '$symbol${number(value, decimals: decimals)}';
     if (value < 0) return '$minus$body';
@@ -28,7 +28,7 @@ abstract final class BnFormat {
     return body;
   }
 
-  /// Splits `$5,430.20` into (`$5,430`, `.20`) for the large balance style.
+
   static (String, String) moneyParts(num value, {String symbol = r'$'}) {
     final s = money(value, symbol: symbol);
     final dot = s.lastIndexOf('.');
@@ -46,7 +46,7 @@ abstract final class BnFormat {
         _ => r'$',
       };
 
-  /// Initials from a display name: "Pierre Ortega" → "PO".
+
   static String initials(String name) {
     final parts = name.trim().split(RegExp(r'\s+')).where((p) => p.isNotEmpty).toList();
     if (parts.isEmpty) return '';
@@ -56,7 +56,7 @@ abstract final class BnFormat {
 
   static String firstName(String name) => name.trim().split(RegExp(r'\s+')).first;
 
-  /// "Buenos días," / "Buenas tardes," / "Buenas noches,"
+
   static String greeting([DateTime? now]) {
     final h = (now ?? DateTime.now()).hour;
     if (h < 12) return 'Buenos días,';
@@ -73,14 +73,14 @@ abstract final class BnFormat {
     return '${two(l.hour)}:${two(l.minute)}';
   }
 
-  /// "10:43 AM" (local time).
+
   static String clock12(DateTime date) {
     final d = date.toLocal();
     final h = d.hour % 12 == 0 ? 12 : d.hour % 12;
     return '$h:${two(d.minute)} ${d.hour < 12 ? 'AM' : 'PM'}';
   }
 
-  /// "Hoy, 08:43" · "Ayer, 18:20" · "28 sep, 10:12"
+
   static String relativeDay(DateTime date, [DateTime? now]) {
     final d = date.toLocal();
     final n = now ?? DateTime.now();
@@ -92,7 +92,7 @@ abstract final class BnFormat {
     return '${d.day} ${monthsShort[d.month - 1]}, ${time(d)}';
   }
 
-  /// "Hoy" · "Ayer" · "Lunes 28 de septiembre" style section headers.
+
   static String daySection(DateTime date, [DateTime? now]) {
     final d = date.toLocal();
     final n = now ?? DateTime.now();
@@ -104,7 +104,7 @@ abstract final class BnFormat {
     return '${d.day} de ${months[d.month - 1]}';
   }
 
-  /// "3 oct 2026, 14:32"
+
   static String dateTime(DateTime date) {
     final d = date.toLocal();
     return '${d.day} ${monthsShort[d.month - 1]} ${d.year}, ${time(d)}';

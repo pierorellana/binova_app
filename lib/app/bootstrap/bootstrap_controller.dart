@@ -32,7 +32,7 @@ class BootstrapController extends ChangeNotifier {
       destination = resolved;
       status = BootstrapStatus.ready;
     } on Object {
-      // Allow the splash "Reintentar" action to run the bootstrap again.
+
       _started = false;
       status = BootstrapStatus.failure;
       errorMessage = 'No pudimos preparar la aplicación.';

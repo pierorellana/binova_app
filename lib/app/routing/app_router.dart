@@ -58,8 +58,8 @@ abstract final class AppRoute {
   static const developerTools = '/developer-tools';
 }
 
-/// Richer argument for account / movements routes: knows where the user came
-/// from so the back label and active tab match the prototype.
+
+
 class AccountRouteArgs {
   const AccountRouteArgs(this.accountId, {this.fromHome = false, this.transactionId});
 
@@ -82,8 +82,8 @@ abstract final class AppRouter {
     final child = _build(settings);
     final name = settings.name;
     if (_tabRoutes.contains(name)) return BnRoutes.instant<void>(child, settings: settings);
-    // From Inicio the account row already expanded into the detail header
-    // (shared element), so the route itself only cross-fades.
+
+
     if (name == AppRoute.accountDetail && (AccountRouteArgs.from(settings.arguments)?.fromHome ?? false)) {
       return BnRoutes.fade<void>(child, settings: settings, duration: const Duration(milliseconds: 120));
     }

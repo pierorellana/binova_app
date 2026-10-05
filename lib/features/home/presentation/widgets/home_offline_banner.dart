@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import '../../../../core/design_system/binova_widgets.dart';
 import 'home_data.dart';
 
-/// `Estado-SinConexion.dc.html` status banner (drops in: 300 ms, −8 px).
+
 class HomeOfflineBanner extends StatelessWidget {
   const HomeOfflineBanner({
     required this.title,

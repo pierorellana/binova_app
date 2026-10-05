@@ -47,8 +47,8 @@ class AppConfig {
   }
 
   static String get _defaultLocalBaseUrl {
-    // Android Emulator maps the host machine to 10.0.2.2. The iOS simulator,
-    // desktop targets and web can use localhost directly.
+
+
     return defaultTargetPlatform == TargetPlatform.android
         ? 'http://10.0.2.2:3000/v1'
         : 'http://localhost:3000/v1';

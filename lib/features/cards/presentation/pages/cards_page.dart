@@ -20,7 +20,7 @@ import '../widgets/card_wallet.dart';
 String _holderName(BuildContext context) =>
     (context.read<AuthController>().session?.user.displayName ?? '').toUpperCase();
 
-/// Back to the screen that opened the wallet (Productos by default).
+
 void _leave(BuildContext context) {
   final navigator = Navigator.of(context);
   if (navigator.canPop()) {
@@ -30,12 +30,12 @@ void _leave(BuildContext context) {
   }
 }
 
-/// "Tus tarjetas": interactive 3D stack + wallet panel (canvas `modo: ver`).
+
 class CardsPage extends StatefulWidget {
   const CardsPage({this.focus, super.key});
 
-  /// Card brought to the front on open: a card id or a type name
-  /// (`credit`, `debit`, `virtual`), like the canvas `cardsFront`.
+
+
   final String? focus;
 
   @override
@@ -186,8 +186,8 @@ class _CardsPageState extends State<CardsPage> with CardWalletMixin {
 
 enum _Phase { intro, face, build, fail, pending, done }
 
-/// "Crear tarjeta virtual" (and the first-time "Crear tarjetas" flow):
-/// intro → Face ID → construction → wallet, or the error state.
+
+
 class VirtualCardCreationPage extends StatefulWidget {
   const VirtualCardCreationPage({super.key});
 
@@ -265,7 +265,7 @@ class _VirtualCardCreationPageState extends State<VirtualCardCreationPage> with 
   static bool _isTerminal(CardCreationStatus s) =>
       s == CardCreationStatus.completed || s == CardCreationStatus.failure || s == CardCreationStatus.pending;
 
-  // ---- State machine (port of start() / build() in the canvas script) ----
+
 
   void _onCreation() {
     if (!mounted) return;
@@ -303,8 +303,8 @@ class _VirtualCardCreationPageState extends State<VirtualCardCreationPage> with 
     unawaited(_creation.start());
   }
 
-  /// Real Face ID passed: keep the scan visible until 1.6 s, then `ok`
-  /// for 800 ms before the construction starts.
+
+
   void _confirmFace() {
     _later(math.max(0, 1600 - _elapsed), () {
       setState(() => _face = BnFaceIdState.ok);
@@ -355,7 +355,7 @@ class _VirtualCardCreationPageState extends State<VirtualCardCreationPage> with 
       case CardCreationStatus.completed:
         var cards = <Card>[_creation.card!];
         if (_first) {
-          // The first request may provision the whole set; stack every new card.
+
           final list = context.read<CardsController>();
           await list.load();
           if (!mounted || _phase != _Phase.build) return;
@@ -382,7 +382,7 @@ class _VirtualCardCreationPageState extends State<VirtualCardCreationPage> with 
     }
   }
 
-  /// Canvas order for the first set: débito, virtual, crédito.
+
   static int _firstRank(Card c) => switch (CardSkin.of(c)) {
         CardSkin.debit => 0,
         CardSkin.virtual => 1,
@@ -411,7 +411,7 @@ class _VirtualCardCreationPageState extends State<VirtualCardCreationPage> with 
         setState(() {
           _docked.add(card.id);
           walletOrder.remove(card.id);
-          // The new virtual card lands in front; the first set stacks behind.
+
           _first ? walletOrder.add(card.id) : walletOrder.insert(0, card.id);
         });
       });
@@ -458,7 +458,7 @@ class _VirtualCardCreationPageState extends State<VirtualCardCreationPage> with 
     unawaited(_creation.refresh());
   }
 
-  // ---- View ----
+
 
   String get _caption {
     if (_failing) return 'No se pudo completar';
@@ -692,7 +692,7 @@ class _VirtualCardCreationPageState extends State<VirtualCardCreationPage> with 
       );
 }
 
-/// Single card opened from a notification: same wallet UI, one card.
+
 class CardDetailPage extends StatefulWidget {
   const CardDetailPage({required this.cardId, super.key});
 
@@ -789,7 +789,7 @@ class _CardDetailPageState extends State<CardDetailPage> with CardWalletMixin {
   }
 }
 
-/// Intro copy block: title, body, swatch rows and the primary CTA.
+
 class _IntroBlock extends StatelessWidget {
   const _IntroBlock({
     required this.title,
@@ -891,7 +891,7 @@ class _IntroRow extends StatelessWidget {
       );
 }
 
-/// Fail / pending panel (`top: 440px`): alert tile, copy, primary + ghost.
+
 class _OutcomePanel extends StatelessWidget {
   const _OutcomePanel({
     required this.tileColor,
@@ -971,8 +971,8 @@ class _OutcomePanel extends StatelessWidget {
       );
 }
 
-/// `.under` / `.under.blur`: the intro softens (blur 8 px, opacity .6)
-/// behind the Face ID HUD in 360 ms.
+
+
 class _Under extends StatelessWidget {
   const _Under({required this.blurred, required this.child});
 
@@ -996,7 +996,7 @@ class _Under extends StatelessWidget {
       );
 }
 
-/// `.fade`: 300 ms opacity on mount.
+
 class _FadeIn extends StatelessWidget {
   const _FadeIn({required this.child});
 
@@ -1012,7 +1012,7 @@ class _FadeIn extends StatelessWidget {
       );
 }
 
-/// Loading placeholder: card silhouette at Y0 plus the panel lines.
+
 class _StackSkeleton extends StatelessWidget {
   const _StackSkeleton({this.panel = true});
 

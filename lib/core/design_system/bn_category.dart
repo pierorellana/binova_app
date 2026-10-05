@@ -1,7 +1,7 @@
 import 'bn_svg.dart';
 
-/// Visual identity of a movement category: the Spanish label and the
-/// prototype glyph (`Movimientos.dc.html` icons: car, cup, in, bag, bolt, card).
+
+
 class BnCategory {
   const BnCategory._(this.label, this.svg);
 
@@ -17,8 +17,8 @@ class BnCategory {
   static final _card = BnGlyphs.card;
   static final _phone = BnGlyphs.phone;
 
-  /// Resolves an API category key (or an already-Spanish label).
-  /// [incoming] picks the "received" arrow for transfers.
+
+
   static BnCategory of(String key, {bool incoming = false}) {
     switch (key.trim().toLowerCase()) {
       case 'transport':

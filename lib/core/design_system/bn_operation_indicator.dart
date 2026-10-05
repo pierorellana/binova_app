@@ -9,13 +9,13 @@ import 'bn_svg.dart';
 
 enum BnOpPhase { proc, ok, warn, err }
 
-/// Indicador de operación BInova (`.op` in the prototype).
-///
-/// * proc: the isotipo floats with a ±16° 3D tilt (2.4 s) while an orange
-///   line runs along its border (1.6 s).
-/// * ok: the square morphs into a circle, BI fades, a check is drawn.
-/// * warn: light circle + dotted spinning ring + clock.
-/// * err: stays square, shakes once, shows "!".
+
+
+
+
+
+
+
 class BnOperationIndicator extends StatefulWidget {
   const BnOperationIndicator({required this.phase, this.small = false, super.key});
 
@@ -89,7 +89,7 @@ class _BnOperationIndicatorState extends State<BnOperationIndicator> with Ticker
     super.dispose();
   }
 
-  // ease-in-out between keyframes 0 → 50% → 100%.
+
   static double _pingPong(double t) {
     final half = t < .5 ? t * 2 : (1 - t) * 2;
     return Curves.easeInOut.transform(half);
@@ -114,12 +114,12 @@ class _BnOperationIndicatorState extends State<BnOperationIndicator> with Ticker
             final k = reduce ? 0.0 : _pingPong(_loop.value);
             final tiltAmount = proc ? 1.0 : (1 - m);
 
-            // tilt keyframes: 0/100% → (y 0, rx 8°, ry −16°) · 50% → (y −6, rx −4°, ry 16°)
+
             final ty = lerpDouble(0, -6, k)! * tiltAmount;
             final rx = bnDeg(lerpDouble(8, -4, k)!) * tiltAmount * (reduce ? 0 : 1);
             final ry = bnDeg(lerpDouble(-16, 16, k)!) * tiltAmount * (reduce ? 0 : 1);
 
-            // pop (ok) 0 → 45% 1.06 → 100% 1
+
             double pop = 1;
             if (_pop.isAnimating || _pop.value > 0) {
               final t = BnMotion.entrada.transform(_pop.value);
@@ -134,7 +134,7 @@ class _BnOperationIndicatorState extends State<BnOperationIndicator> with Ticker
                 ? lerpDouble(28, fromCircle ? 48 : 28, m)!
                 : lerpDouble(28, radiusTarget, m)!;
 
-            // Surface: dark radial gradient → white (warn) / critical tint (err).
+
             final lightness = phase == BnOpPhase.warn || phase == BnOpPhase.err ? m : 0.0;
             final lightColor = phase == BnOpPhase.err ? BnColors.criticoFondo : BnColors.superficie;
             final lightBorder = phase == BnOpPhase.err ? const Color(0xFFEBC9C5) : BnColors.hairline;
@@ -169,7 +169,7 @@ class _BnOperationIndicatorState extends State<BnOperationIndicator> with Ticker
                         ),
                       ),
                     ),
-                    // inset 0 1px 0 rgba(255,255,255,.08)
+
                     Positioned(
                       left: 0,
                       right: 0,
@@ -188,7 +188,7 @@ class _BnOperationIndicatorState extends State<BnOperationIndicator> with Ticker
                           ),
                         ),
                       ),
-                    // BI + orange bar
+
                     Center(
                       child: Opacity(
                         opacity: ((1 - m) * (proc && reduce ? .5 + .5 * _pingPong(_trace.value) : 1)).clamp(0.0, 1.0),
@@ -235,7 +235,7 @@ class _BnOperationIndicatorState extends State<BnOperationIndicator> with Ticker
               ),
             );
 
-            // Orange trace runs around the border (rides along with the tilt).
+
             tile = SizedBox(
               width: 106,
               height: 106,
@@ -267,7 +267,7 @@ class _BnOperationIndicatorState extends State<BnOperationIndicator> with Ticker
               clipBehavior: Clip.none,
               alignment: Alignment.center,
               children: [
-                // floor shadow
+
                 Positioned(
                   left: 24,
                   right: 24,
@@ -342,7 +342,7 @@ class _BiMark extends StatelessWidget {
       );
 }
 
-/// `rect x=1 y=1 w=98 h=98 rx=30 pathLength=100; stroke-dasharray: 16 84`
+
 class _TracePainter extends CustomPainter {
   _TracePainter({required this.progress, required this.reduce});
 
@@ -378,8 +378,8 @@ class _TracePainter extends CustomPainter {
   bool shouldRepaint(covariant _TracePainter old) => old.progress != progress || old.reduce != reduce;
 }
 
-/// `radial-gradient(closest-side, rgba(20,21,24,.22), transparent)`: an
-/// ellipse filling the box (a plain RadialGradient would be circular).
+
+
 class BnFloorShadowPainter extends CustomPainter {
   const BnFloorShadowPainter({this.color = const Color(0x38141518)});
 
@@ -406,7 +406,7 @@ class BnFloorShadowPainter extends CustomPainter {
   bool shouldRepaint(covariant BnFloorShadowPainter oldDelegate) => oldDelegate.color != color;
 }
 
-/// `circle r=57 stroke=#A8A59E 1.5 dasharray 3 7`
+
 class _DottedRingPainter extends CustomPainter {
   const _DottedRingPainter();
 

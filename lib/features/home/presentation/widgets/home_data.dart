@@ -3,7 +3,7 @@ import '../../../accounts/domain/entities/account.dart';
 import '../../../dashboard/domain/entities/dashboard_config.dart';
 import '../../../transactions/domain/entities/transaction.dart';
 
-/// Glyphs used only by Home that are not part of [BnGlyphs].
+
 abstract final class HomeGlyphs {
   static final wifiOff = bnLine(
     '<path d="M3 3l18 18"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M5 12.5a10 10 0 0 1 4.2-2.4M19 12.5a10 10 0 0 0-3-2"/>'
@@ -13,14 +13,14 @@ abstract final class HomeGlyphs {
   static final clock = bnLine('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', stroke: 2);
 }
 
-/// Mask used for every amount while the balance is hidden.
+
 const homeMask = '••••';
 
 double? _parse(Object? raw) => raw is num ? raw.toDouble() : double.tryParse('${raw ?? ''}'.replaceAll(',', ''));
 
 double homeAmount(String raw) => _parse(raw) ?? 0;
 
-/// Everything the Home layout needs, derived from the existing controllers.
+
 class HomeData {
   const HomeData({
     required this.symbol,
@@ -44,8 +44,8 @@ class HomeData {
     };
     final currency = payload['currency'] as String? ?? (accounts.isEmpty ? 'USD' : accounts.first.currency);
 
-    // Month totals: the dashboard payload when present, otherwise the
-    // movements of the current month.
+
+
     final now = DateTime.now();
     final month = transactions.where((t) {
       final at = t.occurredAt.toLocal();
@@ -70,8 +70,8 @@ class HomeData {
     );
   }
 
-  /// "Mis productos" on Inicio (Home.dc.html): the main account plus the
-  /// credit card; the full list lives in the Productos tab.
+
+
   static List<Account> _featured(List<Account> accounts) {
     final main = accounts.where((a) => a.type != AccountType.credit).take(1);
     final credit = accounts.where((a) => a.type == AccountType.credit).take(1);
@@ -91,7 +91,7 @@ class HomeData {
 
   static String monthName([DateTime? now]) => BnFormat.months[(now ?? DateTime.now()).month - 1];
 
-  /// "Actualizado hace 1 min"
+
   static String updatedLabel(DateTime? at, [DateTime? now]) {
     if (at == null) return 'Actualizado hace un momento';
     final diff = (now ?? DateTime.now()).difference(at);
@@ -101,6 +101,6 @@ class HomeData {
     return 'Actualizado el ${BnFormat.dateTime(at)}';
   }
 
-  /// "10:43 AM"
+
   static String clock(DateTime at) => BnFormat.clock12(at);
 }

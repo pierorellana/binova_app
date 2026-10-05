@@ -70,7 +70,7 @@ class _InsightsPageState extends State<InsightsPage> {
           _InsightsView.from(insights, controller.fetchedAt ?? DateTime.now());
       body = SliverToBoxAdapter(
         child: _Content(
-          // Re-keyed per snapshot so the bars grow again after a refresh.
+
           key: ValueKey(controller.fetchedAt),
           data: data,
           offline: controller.status == InsightsStatus.offlineStale,
@@ -111,7 +111,7 @@ abstract final class _Glyphs {
       stroke: 1.5);
 }
 
-/// Toolbar (calendar button), large title and the period segmented control.
+
 class _Header extends StatelessWidget {
   const _Header({required this.period, required this.onPeriod});
 
@@ -162,7 +162,7 @@ class _Header extends StatelessWidget {
       );
 }
 
-/// `role="tablist"` segmented control: `#EBE9E4` track, `.seg` 220 ms ease.
+
 class _PeriodSegmented extends StatelessWidget {
   const _PeriodSegmented({required this.value, required this.onChanged});
 
@@ -560,8 +560,8 @@ class _ObservationCard extends StatelessWidget {
       );
 }
 
-// ---------------------------------------------------------------------------
-// View data derived from the monthly [Insights] snapshot.
+
+
 
 class _Slice {
   const _Slice(
@@ -607,7 +607,7 @@ class _InsightsView {
     required this.observations,
   });
 
-  /// Legend colors in prototype order (largest category first).
+
   static const _palette = [
     BnColors.brandNaranjaBi,
     BnColors.carbon,
@@ -643,8 +643,8 @@ class _InsightsView {
     final income = double.tryParse(insights.totalIncome.amount) ?? 0;
     final change = double.tryParse(insights.comparisonPercentage ?? '');
 
-    // Six-period trend from the API; older APIs only report the current month
-    // and its change, so fall back to the two months derivable from it.
+
+
     final trend = insights.trend.isNotEmpty
         ? [
             for (var i = 0; i < insights.trend.length; i++)
@@ -698,8 +698,8 @@ class _InsightsView {
     );
   }
 
-  /// Groups API categories by their Spanish label (e.g. food + groceries →
-  /// Alimentación) and folds everything past the fourth into «Otros».
+
+
   static List<_Slice> _slices(List<InsightCategory> categories) {
     final grouped = <String, ({String svg, double amount, double pct})>{};
     for (final c in categories) {
@@ -739,8 +739,8 @@ class _InsightsView {
   }
 }
 
-/// Opens the movements of the main (first non-credit) account, as the
-/// prototype's "Ver mis gastos" link does.
+
+
 void _openMovements(BuildContext context) {
   final accounts = context.read<AccountsController>().accounts;
   final main = accounts.where((a) => a.type != AccountType.credit).firstOrNull;

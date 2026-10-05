@@ -8,8 +8,8 @@ import 'bn_svg.dart';
 
 enum BnFaceIdState { idle, scan, ok, err }
 
-/// HUD Face ID BInova: light glass, not the system's black card.
-/// Shared by the unlock screen (156 px), operations and card creation (148 px).
+
+
 class BnFaceIdHud extends StatefulWidget {
   const BnFaceIdHud({required this.state, this.size = 148, this.label = 'Face ID', super.key});
 
@@ -225,7 +225,7 @@ class _BnFaceIdHudState extends State<BnFaceIdHud> with TickerProviderStateMixin
   }
 }
 
-/// Small Face ID glyph (used on buttons such as "Confirmar con Face ID").
+
 class BnFaceIdGlyph extends StatelessWidget {
   const BnFaceIdGlyph({this.size = 20, this.color, super.key});
 

@@ -17,11 +17,11 @@ import 'operation_sheets.dart';
 
 enum OperationStep { pick, amount, confirm, face, op }
 
-/// Shared state machine of Transferir · Pagar · Recargar
-/// (`Transferir.dc.html`): selección → monto → confirmación → Face ID →
-/// procesamiento → resultado. Each page owns its domain input (recipient,
-/// amount, bill) and the submission; this widget owns steps, timers,
-/// transitions, overlays and maps [OperationFlowController] to visuals.
+
+
+
+
+
 class OperationFlowView extends StatefulWidget {
   const OperationFlowView({
     required this.copy,
@@ -53,7 +53,7 @@ class OperationFlowView extends StatefulWidget {
   final OperationTarget? selected;
   final ValueChanged<OperationTarget> onSelect;
 
-  /// Middle area of the amount step (keypad display, bill card, chips).
+
   final Widget amountBody;
   final Widget? keypad;
   final Account? source;
@@ -64,10 +64,10 @@ class OperationFlowView extends StatefulWidget {
   final List<(String, String)> confirmRows;
   final TextEditingController? noteController;
 
-  /// Calls [OperationFlowController.submit] with the page's repository call.
+
   final Future<void> Function() onSubmit;
 
-  /// Clears the page's input for "Otra transferencia / pago / recarga".
+
   final VoidCallback onReset;
 
   @override
@@ -124,9 +124,9 @@ class _OperationFlowViewState extends State<OperationFlowView> {
         _dir = dir;
       });
 
-  // ---------------------------------------------------------------------------
-  // Controller → visual state
-  // ---------------------------------------------------------------------------
+
+
+
 
   void _onFlow() {
     final status = _flow.status;
@@ -185,16 +185,16 @@ class _OperationFlowViewState extends State<OperationFlowView> {
     } else {
       BnHaptics.error();
     }
-    // A pending operation is checked again once ("te avisaremos apenas se confirme").
+
     if (result == BnOpPhase.warn && !_refreshScheduled) {
       _refreshScheduled = true;
       _later(5000, _flow.refresh);
     }
   }
 
-  // ---------------------------------------------------------------------------
-  // Actions
-  // ---------------------------------------------------------------------------
+
+
+
 
   void _pick(OperationTarget target) {
     FocusScope.of(context).unfocus();
@@ -298,9 +298,9 @@ class _OperationFlowViewState extends State<OperationFlowView> {
     }
   }
 
-  // ---------------------------------------------------------------------------
-  // Build
-  // ---------------------------------------------------------------------------
+
+
+
 
   @override
   Widget build(BuildContext context) {

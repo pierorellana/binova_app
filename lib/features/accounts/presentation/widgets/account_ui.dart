@@ -7,7 +7,7 @@ import '../../../auth/presentation/providers/auth_controller.dart';
 import '../../domain/entities/account.dart';
 import '../../domain/entities/money.dart';
 
-/// Glyphs copied from the Productos / Cuenta / Movimientos canvases.
+
 abstract final class AccountGlyphs {
   static final cash = bnLine('<rect x="3" y="6" width="18" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.5"/><path d="M6.5 9.5v.01M17.5 14.5v.01"/>');
   static final lock = bnLine('<rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>', stroke: 1.9);
@@ -31,10 +31,10 @@ String lastDigits(String masked) {
   return digits.length <= 4 ? digits : digits.substring(digits.length - 4);
 }
 
-/// `**** 4821`
+
 String shortNumber(String masked) => '**** ${lastDigits(masked)}';
 
-/// Nav-bar / back-label name of an account type ("Ahorros").
+
 String accountTypeShort(AccountType type) => switch (type) {
       AccountType.savings => 'Ahorros',
       AccountType.current => 'Corriente',
@@ -52,7 +52,7 @@ String holderName(BuildContext context) {
   return name == null || name.isEmpty ? '—' : name;
 }
 
-/// Account status with its icon: green check "Activa", amber lock otherwise.
+
 class AccountStatusLabel extends StatelessWidget {
   const AccountStatusLabel({required this.status, this.fontSize = 13, this.iconSize = 14, super.key});
 
@@ -78,8 +78,8 @@ class AccountStatusLabel extends StatelessWidget {
   }
 }
 
-/// `.toast`: dark pill above the tab bar, `toast` keyframes
-/// (0% hidden +8px → 12% visible → 85% visible → 100% faded).
+
+
 class ProductToast extends StatefulWidget {
   const ProductToast({
     required this.message,
@@ -93,7 +93,7 @@ class ProductToast extends StatefulWidget {
   final VoidCallback onDone;
   final Duration duration;
 
-  /// Fixed width (Cuenta: 220). `null` stretches with 24 pt side margins.
+
   final double? width;
 
   @override
@@ -166,7 +166,7 @@ class _ProductToastState extends State<ProductToast> with SingleTickerProviderSt
   }
 }
 
-/// "Sin conexión." banner from `Estado-SinConexion` for stale cached data.
+
 class ProductOfflineBanner extends StatelessWidget {
   const ProductOfflineBanner({required this.fetchedAt, required this.onRetry, super.key});
 
@@ -228,8 +228,8 @@ class ProductOfflineBanner extends StatelessWidget {
       );
 }
 
-/// Centered state from `Estado-Vacio`: ringed glyph, title, copy and a CTA.
-/// Enters with `up 360ms cubic-bezier(.2,.8,.2,1)`.
+
+
 class ProductMessageState extends StatelessWidget {
   const ProductMessageState({
     required this.svg,
@@ -325,7 +325,7 @@ class ProductMessageState extends StatelessWidget {
       );
 }
 
-/// CSS `border: Npx dashed` around a rounded rectangle.
+
 class DashedBorder extends StatelessWidget {
   const DashedBorder({required this.child, required this.color, this.strokeWidth = 1, this.radius = 16, super.key});
 
@@ -374,8 +374,8 @@ class _DashedRRectPainter extends CustomPainter {
       old.color != color || old.strokeWidth != strokeWidth || old.radius != radius;
 }
 
-/// Presents the "Compartir datos" sheet. Resolves to `true` when the data
-/// was copied, so the caller can flash "Número copiado".
+
+
 Future<bool> showAccountShareSheet(BuildContext context, Account account) async {
   final copied = await showBnSheet<bool>(
     context,

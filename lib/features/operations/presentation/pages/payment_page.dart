@@ -12,7 +12,7 @@ import '../widgets/operation_flow_view.dart';
 import '../widgets/operation_motion.dart';
 import '../widgets/operation_parts.dart';
 
-/// Pagar servicios: servicio → consulta de planilla → confirmación → Face ID → resultado.
+
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
 
@@ -20,8 +20,8 @@ class PaymentPage extends StatefulWidget {
   State<PaymentPage> createState() => _PaymentPageState();
 }
 
-/// A saved service. The API has no "my services" endpoint yet, so the list
-/// mirrors the prototype; the bill itself comes from `getDebt`.
+
+
 class _Service {
   const _Service(this.providerId, this.name, this.subtitle, this.accountReference, this.icon);
 
@@ -84,7 +84,7 @@ class _PaymentPageState extends State<PaymentPage> {
               providerId: service.providerId,
               accountReference: service.accountReference,
             ),
-        // The prototype keeps the bill skeleton for 1 s.
+
         Future<void>.delayed(const Duration(milliseconds: 1000)),
       ).wait;
       if (mounted && query == _query) setState(() => _debt = debt);
@@ -100,7 +100,7 @@ class _PaymentPageState extends State<PaymentPage> {
     return '${m[0].toUpperCase()}${m.substring(1)} ${d.year}';
   }
 
-  /// Billing period: the month before the due date.
+
   static String _period(Debt debt) {
     final due = debt.dueDate ?? DateTime.now();
     return _monthYear(DateTime(due.year, due.month - 1));
@@ -170,7 +170,7 @@ class _PaymentPageState extends State<PaymentPage> {
       );
 }
 
-/// "Consultando tu planilla…" skeleton → "Valor a pagar" card.
+
 class _BillCard extends StatelessWidget {
   const _BillCard({
     required this.loading,

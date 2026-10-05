@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 
 import '../../../../core/design_system/binova_widgets.dart';
 
-/// Avatar · greeting · bell with the orange unread dot.
-/// [onBell] null hides the bell (offline layout).
+
+
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
     required this.displayName,

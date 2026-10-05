@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-/// BInova design tokens, generated from the prototype
-/// (`assets/tokens/binova-tokens.json`). The `Bn*` classes are the source of
-/// truth; the `Binova*` classes are kept as aliases for older call sites.
+
+
+
 abstract final class BnColors {
   static const brandNaranjaBi = Color(0xFFFF9000);
   static const brandNaranjaTinte = Color(0xFFFFF1DF);
@@ -74,8 +74,8 @@ abstract final class BnRadius {
   static const double pantalla = 55;
 }
 
-/// Text styles. Letter spacing in the prototype is expressed in `em`; the
-/// values here are already converted to logical pixels.
+
+
 abstract final class BnType {
   static const String family = 'Geist';
   static const List<FontFeature> tabular = [FontFeature.tabularFigures()];
@@ -121,9 +121,9 @@ abstract final class BnMotion {
   static const double pressScale = 0.97;
 }
 
-// ---------------------------------------------------------------------------
-// Legacy aliases (kept so non-UI code and older widgets keep compiling).
-// ---------------------------------------------------------------------------
+
+
+
 abstract final class BinovaColors {
   static const background = BnColors.blancoCalido;
   static const surface = BnColors.superficie;

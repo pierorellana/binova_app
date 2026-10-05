@@ -8,8 +8,8 @@ import 'card_faces.dart';
 import 'card_skin.dart';
 import 'wallet_card.dart';
 
-/// Stack geometry from the canvas (frame coordinates, 390×844 with a 59 pt
-/// status bar): `Y0 = 128, STEP = 46, STAGE_Y = 470`.
+
+
 abstract final class CardStackMetrics {
   static const y0 = 128.0;
   static const step = 46.0;
@@ -17,16 +17,16 @@ abstract final class CardStackMetrics {
   static const cardHeight = 216.0;
   static const side = 24.0;
 
-  /// Offset between frame coordinates and the device (real top inset).
+
   static double frameOffset(BuildContext context) => bnTopInset(context) - BnSpacing.safeTop;
 
   static double bottomOf(int docked) => docked == 0 ? y0 + cardHeight : y0 + (docked - 1) * step + cardHeight;
 
-  /// `panelTop: k >= 3 ? 462 : 418`, extended for larger wallets.
+
   static double panelTop(int docked) => docked >= 3 ? 462 + (docked - 3) * step : 418;
 }
 
-/// Resolved pose and flags of one card (the `cards` map of `renderVals`).
+
 class CardStackEntry {
   const CardStackEntry({
     required this.visual,
@@ -59,8 +59,8 @@ class CardStackEntry {
   final bool flipped;
 }
 
-/// Port of `renderVals().cards`: docked cards fan out from Y0 with the front
-/// one lowest; cards under construction sit at STAGE_Y above everything.
+
+
 List<CardStackEntry> layoutCardStack({
   required List<CardVisual> present,
   required List<String> docked,
@@ -99,8 +99,8 @@ List<CardStackEntry> layoutCardStack({
   return entries;
 }
 
-/// `.stage`: renders the entries in z-order with the 720 ms pose transition
-/// (`translateY(y) scale(s)`, origin top center).
+
+
 class CardStackLayer extends StatelessWidget {
   const CardStackLayer({required this.entries, this.onTapCard, this.onSwipe, super.key});
 
@@ -141,7 +141,7 @@ class _PosedCard extends StatelessWidget {
     final e = entry;
     final title = e.visual.card?.productName ?? e.visual.skin.title;
     return TweenAnimationBuilder<Offset>(
-      // dx = translateY, dy = scale.
+
       tween: Tween(end: Offset(e.y, e.scale)),
       duration: bnReduceMotion(context) ? Duration.zero : BnMotion.tarjetaAlApilar,
       curve: BnMotion.entrada,
@@ -171,7 +171,7 @@ class _PosedCard extends StatelessWidget {
   }
 }
 
-/// `.slot`: dashed placeholder shown before the first cards exist.
+
 class CardSlot extends StatelessWidget {
   const CardSlot({super.key});
 
@@ -215,7 +215,7 @@ class _DashedBorderPainter extends CustomPainter {
   bool shouldRepaint(covariant _DashedBorderPainter oldDelegate) => false;
 }
 
-/// `.bar3` progress: one 3 px segment per card, scaleX 0 → 1 in 500 ms.
+
 class CardBuildBars extends StatelessWidget {
   const CardBuildBars({required this.total, required this.done, super.key});
 

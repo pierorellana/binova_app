@@ -6,8 +6,8 @@ import '../../../../core/design_system/binova_widgets.dart';
 import 'operation_motion.dart';
 import 'operation_parts.dart';
 
-/// `.under`: the confirmation blurs, shrinks to 98.5 % and dims to 70 %
-/// while the Face ID HUD is on top (360 ms).
+
+
 class OperationUnderLayer extends StatelessWidget {
   const OperationUnderLayer({required this.blurred, required this.child, super.key});
 
@@ -35,7 +35,7 @@ class OperationUnderLayer extends StatelessWidget {
   }
 }
 
-/// Face ID HUD over the blurred confirmation, with the failure fallback.
+
 class OperationFaceIdLayer extends StatelessWidget {
   const OperationFaceIdLayer({
     required this.state,

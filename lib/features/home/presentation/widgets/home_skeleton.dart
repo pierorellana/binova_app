@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 
 import '../../../../core/design_system/binova_widgets.dart';
 
-/// `Estado-Carga.dc.html`: Home skeleton shown while the dashboard loads.
-/// Light blocks use `.sk`, the ones on the grafito card use `.skd`.
+
+
 class HomeSkeleton extends StatefulWidget {
   const HomeSkeleton({super.key});
 
@@ -165,7 +165,7 @@ class _Block extends StatelessWidget {
     return AnimatedBuilder(
       animation: animation,
       builder: (context, _) {
-        // background-position 120% → -20% over a 300% wide gradient, ease-in-out.
+
         final p = reduce ? 0.5 : Curves.easeInOut.transform(animation.value);
         return Container(
           width: width,

@@ -5,8 +5,8 @@ import '../../../../core/design_system/binova_widgets.dart';
 const _cardWidth = 264.0;
 const _gap = 12.0;
 
-/// "Para ti" horizontal carousel (`scroll-snap-type: x mandatory`, cards snap
-/// to the 20 px leading padding).
+
+
 class HomeForYou extends StatelessWidget {
   const HomeForYou({required this.onInsights, required this.onExchange, super.key});
 
@@ -124,7 +124,7 @@ class _Card extends StatelessWidget {
       );
 }
 
-/// Snaps the scroll offset to multiples of [extent] (card + gap).
+
 class _SnapPhysics extends ScrollPhysics {
   const _SnapPhysics({required this.extent, super.parent});
 

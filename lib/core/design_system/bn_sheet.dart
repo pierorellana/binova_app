@@ -8,8 +8,8 @@ import 'binova_tokens.dart';
 import 'bn_motion.dart';
 import 'bn_svg.dart';
 
-/// Presents a BInova sheet: spring `cubic-bezier(.32,.72,0,1)` 440 ms slide,
-/// `rgba(20,21,24,.32)` dim with a progressive 6 px blur, drag to dismiss.
+
+
 Future<T?> showBnSheet<T>(
   BuildContext context, {
   required WidgetBuilder builder,
@@ -187,7 +187,7 @@ class _RenderMeasure extends RenderProxyBox {
   }
 }
 
-/// 36×5 grabber, `#D6D2CA`.
+
 class BnSheetHandle extends StatelessWidget {
   const BnSheetHandle({super.key});
 
@@ -201,7 +201,7 @@ class BnSheetHandle extends StatelessWidget {
       );
 }
 
-/// Sheet title row: 20/600 title + 32 pt round close button.
+
 class BnSheetHeader extends StatelessWidget {
   const BnSheetHeader({required this.title, this.onClose, this.topMargin = 12, super.key});
 
@@ -241,13 +241,13 @@ class BnCloseButton extends StatelessWidget {
       );
 }
 
-/// Route helpers used by the app router.
+
 abstract final class BnRoutes {
-  /// Hierarchical push: native iOS slide with interactive swipe-back.
+
   static PageRoute<T> push<T>(Widget child, {RouteSettings? settings, bool fullscreenDialog = false}) =>
       CupertinoPageRoute<T>(builder: (_) => child, settings: settings, fullscreenDialog: fullscreenDialog);
 
-  /// Tab switch / root replacement: quick cross-fade (180 ms).
+
   static PageRoute<T> fade<T>(Widget child, {RouteSettings? settings, Duration duration = BnMotion.fadePantalla}) =>
       PageRouteBuilder<T>(
         settings: settings,
@@ -258,7 +258,7 @@ abstract final class BnRoutes {
             FadeTransition(opacity: CurvedAnimation(parent: animation, curve: Curves.ease), child: child),
       );
 
-  /// No animation at all (iOS tab bar switches are instant).
+
   static PageRoute<T> instant<T>(Widget child, {RouteSettings? settings}) => PageRouteBuilder<T>(
         settings: settings,
         transitionDuration: Duration.zero,

@@ -5,8 +5,8 @@ import 'package:flutter/widgets.dart';
 import '../../../../core/design_system/binova_widgets.dart';
 import 'card_skin.dart';
 
-/// Card expiry is not part of the card entity, so it stays masked like the
-/// rest of the protected data.
+
+
 const kCardExpiryMasked = '••/••';
 
 final _contactless = bnLine(
@@ -14,16 +14,16 @@ final _contactless = bnLine(
   stroke: 1.7,
 );
 
-/// Time marks (ms) of the construction sequence in `Tarjetas.dc.html`:
-/// outline 60+520 → fill wipe 380+520 → sweep 820+700 → d1/d2/d3 → g1..g4.
+
+
 abstract final class CardBuildTimeline {
   static const total = 1520.0;
   static double seg(double t, double start, double duration, Curve curve) =>
       curve.transform(((t - start) / duration).clamp(0.0, 1.0));
 }
 
-/// Front side (`.side` anverso). [buildMs] is the elapsed construction time;
-/// null means the card is already built.
+
+
 class CardFront extends StatelessWidget {
   const CardFront({
     required this.visual,
@@ -116,7 +116,7 @@ class CardFront extends StatelessWidget {
   }
 }
 
-/// Back side (`.side.back`): magnetic stripe, masked number, expiry, CVV.
+
 class CardBack extends StatelessWidget {
   const CardBack({required this.visual, super.key});
 
@@ -178,7 +178,7 @@ class CardBack extends StatelessWidget {
   }
 }
 
-/// "BI" wordmark with the orange underline used on the cards.
+
 class CardBrandMark extends StatelessWidget {
   const CardBrandMark(
       {this.fontSize = 17,
@@ -223,7 +223,7 @@ class CardBrandMark extends StatelessWidget {
       );
 }
 
-/// EMV chip: 40×30, r7, two horizontal and one vertical contact line.
+
 class CardChip extends StatelessWidget {
   const CardChip({required this.color, super.key});
 
@@ -312,7 +312,7 @@ class _Digit extends StatelessWidget {
         );
 }
 
-/// `.sweep`: skewed white shine travelling from -40% to 110%.
+
 class _Sweep extends StatelessWidget {
   const _Sweep({required this.progress});
 
@@ -350,7 +350,7 @@ class _Sweep extends StatelessWidget {
       );
 }
 
-/// `clip-path: inset(0 X% 0 0 round 20px)` animated from 100% to 0.
+
 class _WipeClipper extends CustomClipper<Path> {
   const _WipeClipper(this.progress);
 

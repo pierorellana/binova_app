@@ -6,8 +6,8 @@ import 'operation_parts.dart';
 
 enum AmountKeyResult { accepted, rejected, rejectedWithHaptic }
 
-/// Keypad input rules of the prototype (`press(k)`): at most 7 digits and
-/// 2 decimals, a single decimal point, leading zero replaced.
+
+
 abstract final class AmountInput {
   static (String, AmountKeyResult) press(String value, String key) {
     if (key == 'del') {
@@ -27,7 +27,7 @@ abstract final class AmountInput {
 
   static double parse(String value) => double.tryParse(value.isEmpty ? '0' : value) ?? 0;
 
-  /// `1500.5` typed → `1,500.5` shown (integer part grouped, decimals as typed).
+
   static String shown(String value) {
     final raw = value.isEmpty ? '0' : value;
     final parts = raw.split('.');
@@ -36,8 +36,8 @@ abstract final class AmountInput {
   }
 }
 
-/// Big amount with grey `$`, pop-in of the last digit, font-size transition
-/// (68 → 52 px beyond 7 characters) and the invalid-input nudge.
+
+
 class AmountDisplay extends StatelessWidget {
   const AmountDisplay({
     required this.value,
@@ -91,7 +91,7 @@ class AmountDisplay extends StatelessWidget {
   }
 }
 
-/// 3×4 numeric keypad (`.key`: #E9E6E1 + scale .94 while pressed, 120 ms).
+
 class AmountKeypad extends StatelessWidget {
   const AmountKeypad({required this.onKey, super.key});
 

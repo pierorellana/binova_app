@@ -11,8 +11,8 @@ TextStyle _text(double size,
         {FontWeight weight = FontWeight.w400, Color color = BnColors.blancoCalido, double? height}) =>
     TextStyle(fontFamily: BnType.family, fontSize: size, fontWeight: weight, color: color, height: height);
 
-/// Grafito "Saldo total" card. With [offlineAt] it renders the cached
-/// variant from `Estado-SinConexion` (no eye toggle, "Saldo a las …").
+
+
 class HomeBalanceCard extends StatelessWidget {
   const HomeBalanceCard({
     required this.data,
@@ -156,8 +156,8 @@ class _Amount extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget masked() => Text(r'$ ••••••', style: _style.copyWith(letterSpacing: 1.68), semanticsLabel: 'Saldo oculto');
     if (!animate) return hidden ? masked() : _parts(data.balance);
-    // Count-up 650 ms ease-out cubic after 120 ms; stays mounted while masked
-    // so revealing the balance never restarts the count.
+
+
     return BnCountUp(value: data.balance, builder: (context, v) => hidden ? masked() : _parts(v));
   }
 }

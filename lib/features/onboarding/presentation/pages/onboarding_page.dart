@@ -5,8 +5,8 @@ import '../../../../app/routing/app_router.dart';
 import '../../../../core/design_system/binova_widgets.dart';
 import '../../../../core/storage/onboarding_store.dart';
 
-/// Onboarding (`Onboarding.dc.html`): three steps with their illustrations,
-/// page dots and a single primary action. Steps also respond to swipes.
+
+
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
 
@@ -170,7 +170,7 @@ class _Step {
   final Widget illustration;
 }
 
-/// `.page { animation: enter 320ms cubic-bezier(.2,.8,.2,1) }`.
+
 class _PageEnter extends StatefulWidget {
   const _PageEnter({required this.child, super.key});
 
@@ -274,9 +274,9 @@ const _soft = [
   BoxShadow(color: Color(0x0F141518), offset: Offset(0, 10), blurRadius: 28),
 ];
 
-// ---------------------------------------------------------------------------
-// Step 1 · products
-// ---------------------------------------------------------------------------
+
+
+
 
 final _bankGlyph = bnLine('<path d="M3 9.5 12 4l9 5.5"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20h18"/>');
 final _cardGlyph = bnLine('<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 10h18"/><path d="M7 15h3"/>');
@@ -385,9 +385,9 @@ class _ProductRow extends StatelessWidget {
       );
 }
 
-// ---------------------------------------------------------------------------
-// Step 2 · adaptive experience
-// ---------------------------------------------------------------------------
+
+
+
 
 final _trendGlyph = bnLine('<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>', stroke: 1.8);
 final _globeGlyph = bnLine('<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>', stroke: 1.8);
@@ -477,9 +477,9 @@ class _Chip extends StatelessWidget {
       );
 }
 
-// ---------------------------------------------------------------------------
-// Step 3 · spending
-// ---------------------------------------------------------------------------
+
+
+
 
 class _SpendingIllustration extends StatelessWidget {
   const _SpendingIllustration();

@@ -82,7 +82,7 @@ class AuthRepositoryImpl implements AuthRepository {
         await _remote.logout(accessToken: session.accessToken);
       }
     } finally {
-      // Local sign-out is mandatory even when the API is unavailable.
+
       await _local.clearSession();
     }
   }

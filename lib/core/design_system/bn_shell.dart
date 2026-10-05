@@ -561,7 +561,7 @@ class BnDivider extends StatelessWidget {
 
 
 class BnInitialsAvatar extends StatelessWidget {
-  const BnInitialsAvatar({required this.initials, this.size = 44, this.fontSize = 15, super.key});
+  const BnInitialsAvatar({required this.initials, this.size = 48, this.fontSize = 15, super.key});
 
   final String initials;
   final double size;

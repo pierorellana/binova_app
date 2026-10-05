@@ -112,12 +112,18 @@ class _EyeButton extends StatelessWidget {
         onTap: onTap,
         scale: .96,
         semanticLabel: hidden ? 'Mostrar saldo' : 'Ocultar saldo',
-        child: Container(
-          width: 44,
-          height: 32,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(color: const Color(0x14FFFFFF), borderRadius: BorderRadius.circular(16)),
-          child: BnSvg(hidden ? BnGlyphs.eyeOff : BnGlyphs.eye, size: 18, color: BnColors.blancoCalido),
+        child: SizedBox(
+          width: 48,
+          height: 48,
+          child: Center(
+            child: Container(
+              width: 44,
+              height: 32,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(color: const Color(0x14FFFFFF), borderRadius: BorderRadius.circular(16)),
+              child: BnSvg(hidden ? BnGlyphs.eyeOff : BnGlyphs.eye, size: 18, color: BnColors.blancoCalido),
+            ),
+          ),
         ),
       );
 }

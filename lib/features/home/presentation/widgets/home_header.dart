@@ -79,33 +79,39 @@ class _Bell extends StatelessWidget {
         onTap: onTap,
         scale: .96,
         semanticLabel: hasUnread ? 'Notificaciones, sin leer' : 'Notificaciones',
-        child: Container(
-          width: 44,
-          height: 44,
-          decoration: BoxDecoration(
-            color: BnColors.superficie,
-            shape: BoxShape.circle,
-            border: Border.all(color: BnColors.hairline),
-          ),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              Center(child: BnSvg(BnGlyphs.bell, size: 22, color: BnColors.carbon)),
-              if (hasUnread)
-                Positioned(
-                  top: 10,
-                  right: 11,
-                  child: Container(
-                    width: 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: BnColors.brandNaranjaBi,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: BnColors.superficie, width: 1.5),
+        child: SizedBox(
+          width: 48,
+          height: 48,
+          child: Center(
+            child: Container(
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                color: BnColors.superficie,
+                shape: BoxShape.circle,
+                border: Border.all(color: BnColors.hairline),
+              ),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Center(child: BnSvg(BnGlyphs.bell, size: 22, color: BnColors.carbon)),
+                  if (hasUnread)
+                    Positioned(
+                      top: 10,
+                      right: 11,
+                      child: Container(
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: BnColors.brandNaranjaBi,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: BnColors.superficie, width: 1.5),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-            ],
+                ],
+              ),
+            ),
           ),
         ),
       );

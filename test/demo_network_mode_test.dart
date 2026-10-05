@@ -63,7 +63,9 @@ class _RecordingClient extends http.BaseClient {
     requestCount++;
     return http.StreamedResponse(
       Stream<List<int>>.value(
-        utf8.encode('{"data":{},"meta":{}}'),
+        utf8.encode(
+          '{"data":{},"message":"Operación exitosa.","statusCode":200,"meta":{}}',
+        ),
       ),
       200,
       request: request,

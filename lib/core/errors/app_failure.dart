@@ -15,6 +15,7 @@ class AppFailure implements Exception {
     required this.kind,
     this.statusCode,
     this.details = const <String, dynamic>{},
+    this.traceId,
   });
 
   final String code;
@@ -22,6 +23,7 @@ class AppFailure implements Exception {
   final FailureKind kind;
   final int? statusCode;
   final Map<String, dynamic> details;
+  final String? traceId;
 
   factory AppFailure.network(Object error) {
     return AppFailure(
@@ -44,13 +46,17 @@ class AppFailure implements Exception {
     final error = rawError is Map
         ? Map<String, dynamic>.from(rawError)
         : const <String, dynamic>{};
-    final code = error['code'] as String? ?? 'HTTP_ERROR';
-    final message =
-        error['message'] as String? ?? 'Ocurrió un error inesperado.';
-    final rawDetails = error['details'];
+    final code =
+        payload['code'] as String? ?? error['code'] as String? ?? 'HTTP_ERROR';
+    final message = payload['message'] as String? ??
+        error['message'] as String? ??
+        'Ocurrió un error inesperado.';
+    final rawDetails = payload['details'] ?? error['details'];
     final details = rawDetails is Map
         ? Map<String, dynamic>.from(rawDetails)
         : const <String, dynamic>{};
+    final rawMeta = payload['meta'];
+    final meta = rawMeta is Map ? Map<String, dynamic>.from(rawMeta) : null;
 
     return AppFailure(
       code: code,
@@ -58,6 +64,7 @@ class AppFailure implements Exception {
       kind: _kindFromStatus(statusCode),
       statusCode: statusCode,
       details: details,
+      traceId: meta?['traceId'] as String?,
     );
   }
 

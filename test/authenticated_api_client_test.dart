@@ -73,7 +73,9 @@ AppConfig _config() => const AppConfig(
 http.Response _successResponse() => http.Response(
       jsonEncode(<String, dynamic>{
         'data': <String, dynamic>{'ok': true},
-        'meta': <String, dynamic>{},
+        'message': 'Operación exitosa.',
+        'statusCode': 200,
+        'meta': <String, dynamic>{'traceId': 'trace-test'},
       }),
       200,
       headers: <String, String>{'content-type': 'application/json'},
@@ -81,12 +83,12 @@ http.Response _successResponse() => http.Response(
 
 http.Response _errorResponse(int statusCode) => http.Response(
       jsonEncode(<String, dynamic>{
-        'error': <String, dynamic>{
-          'code': 'SESSION_EXPIRED',
-          'message': 'expired',
-          'details': <String, dynamic>{},
-        },
-        'traceId': 'trace-test',
+        'data': null,
+        'message': 'expired',
+        'statusCode': statusCode,
+        'code': 'SESSION_EXPIRED',
+        'details': <String, dynamic>{},
+        'meta': <String, dynamic>{'traceId': 'trace-test'},
       }),
       statusCode,
       headers: <String, String>{'content-type': 'application/json'},

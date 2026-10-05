@@ -5,18 +5,25 @@ import 'package:http/http.dart' as http;
 
 import '../config/app_config.dart';
 import '../errors/app_failure.dart';
+import '../observability/observability.dart';
 import 'demo_network_mode.dart';
 
 class ApiResponse {
   const ApiResponse({
     required this.statusCode,
     required this.data,
+    required this.message,
     required this.meta,
+    this.code,
+    this.details = const <String, dynamic>{},
   });
 
   final int statusCode;
   final dynamic data;
+  final String message;
   final Map<String, dynamic> meta;
+  final String? code;
+  final Map<String, dynamic> details;
 }
 
 class ApiClient {
@@ -24,13 +31,16 @@ class ApiClient {
     required AppConfig config,
     http.Client? client,
     DemoNetworkModeController? demoMode,
+    Observability? observability,
   })  : _config = config,
         _client = client ?? http.Client(),
-        _demoMode = demoMode ?? DemoNetworkModeController();
+        _demoMode = demoMode ?? DemoNetworkModeController(),
+        _observability = observability ?? const NoopObservability();
 
   final AppConfig _config;
   final http.Client _client;
   final DemoNetworkModeController _demoMode;
+  final Observability _observability;
 
   Future<ApiResponse> get(
     String path, {
@@ -94,6 +104,7 @@ class ApiClient {
     String? idempotencyKey,
     Map<String, String?> queryParameters = const <String, String?>{},
   }) async {
+    final stopwatch = Stopwatch()..start();
     final normalizedPath = path.startsWith('/') ? path.substring(1) : path;
     final parsedUri = Uri.parse('${_config.apiBaseUrl}/$normalizedPath');
     final uriQuery = <String, String>{...parsedUri.queryParameters};
@@ -123,25 +134,69 @@ class ApiClient {
       final payload = _decode(response.body);
       if (response.statusCode < 200 || response.statusCode >= 300) {
         throw AppFailure.fromHttp(
-            statusCode: response.statusCode, body: payload);
+          statusCode: response.statusCode,
+          body: payload,
+        );
       }
       final map = payload is Map
           ? Map<String, dynamic>.from(payload)
           : <String, dynamic>{};
       final rawMeta = map['meta'];
-      return ApiResponse(
+      final meta = rawMeta is Map
+          ? Map<String, dynamic>.from(rawMeta)
+          : const <String, dynamic>{};
+      final apiResponse = ApiResponse(
         statusCode: response.statusCode,
         data: map['data'],
-        meta: rawMeta is Map
-            ? Map<String, dynamic>.from(rawMeta)
+        message: map['message'] as String? ?? 'Operación exitosa.',
+        meta: meta,
+        code: map['code'] as String?,
+        details: map['details'] is Map
+            ? Map<String, dynamic>.from(map['details'] as Map)
             : const <String, dynamic>{},
       );
-    } on AppFailure {
+      _observability.logApiResponse(
+        method: method,
+        path: '/$normalizedPath',
+        statusCode: apiResponse.statusCode,
+        latencyMs: stopwatch.elapsedMilliseconds,
+        message: apiResponse.message,
+        traceId: apiResponse.meta['traceId'] as String?,
+        code: apiResponse.code,
+      );
+      return apiResponse;
+    } on AppFailure catch (error) {
+      _observability.logApiError(
+        method: method,
+        path: '/$normalizedPath',
+        statusCode: error.statusCode,
+        latencyMs: stopwatch.elapsedMilliseconds,
+        code: error.code,
+        traceId: error.traceId,
+      );
       rethrow;
     } on TimeoutException catch (error) {
-      throw AppFailure.network(error);
+      final failure = AppFailure.network(error);
+      _observability.logApiError(
+        method: method,
+        path: '/$normalizedPath',
+        statusCode: failure.statusCode,
+        latencyMs: stopwatch.elapsedMilliseconds,
+        code: failure.code,
+        traceId: failure.traceId,
+      );
+      throw failure;
     } on http.ClientException catch (error) {
-      throw AppFailure.network(error);
+      final failure = AppFailure.network(error);
+      _observability.logApiError(
+        method: method,
+        path: '/$normalizedPath',
+        statusCode: failure.statusCode,
+        latencyMs: stopwatch.elapsedMilliseconds,
+        code: failure.code,
+        traceId: failure.traceId,
+      );
+      throw failure;
     }
   }
 
@@ -169,11 +224,12 @@ class ApiClient {
         throw AppFailure.fromHttp(
           statusCode: 500,
           body: const <String, dynamic>{
-            'error': <String, dynamic>{
-              'code': 'DEMO_SERVER_ERROR',
-              'message': 'Error simulado por Developer Tools.',
-              'details': <String, dynamic>{},
-            },
+            'data': null,
+            'message': 'Error simulado por Developer Tools.',
+            'statusCode': 500,
+            'code': 'DEMO_SERVER_ERROR',
+            'details': <String, dynamic>{},
+            'meta': <String, dynamic>{},
           },
         );
       case DemoNetworkMode.timeout:

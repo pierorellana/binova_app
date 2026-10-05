@@ -81,6 +81,9 @@ class AppServices {
 
   static Future<AppServices> create() async {
     final config = AppConfig.fromEnvironment();
+    final observability = DebugObservability(
+      enabled: config.environment != AppEnvironment.prodEvolution,
+    );
     final preferences = await SharedPreferences.getInstance();
     final secureStore = FlutterSecureSessionStore();
     final biometricPreferenceStore =
@@ -89,6 +92,7 @@ class AppServices {
     final apiClient = ApiClient(
       config: config,
       demoMode: demoNetworkMode,
+      observability: observability,
     );
     final cache = SharedPreferencesJsonCacheStore(preferences);
     final biometricAuthenticator = LocalAuthBiometricAuthenticator();
@@ -146,7 +150,7 @@ class AppServices {
       profileRepository: ProfileRepositoryImpl(
         HttpProfileRemoteDataSource(authenticatedClient),
       ),
-      observability: const DebugObservability(),
+      observability: observability,
       demoNetworkMode: demoNetworkMode,
     );
   }

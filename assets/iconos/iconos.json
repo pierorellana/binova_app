@@ -1,0 +1,443 @@
+[
+  {
+    "nombre": "actualizar",
+    "archivo": "actualizar.svg",
+    "trazo": "1.9",
+    "usos": 1,
+    "primera_pantalla": "DesignSystem"
+  },
+  {
+    "nombre": "advertencia",
+    "archivo": "advertencia.svg",
+    "trazo": "1.9",
+    "usos": 1,
+    "primera_pantalla": "Conversor"
+  },
+  {
+    "nombre": "agregar",
+    "archivo": "agregar.svg",
+    "trazo": "1.8",
+    "usos": 2,
+    "primera_pantalla": "Productos"
+  },
+  {
+    "nombre": "agua",
+    "archivo": "agua.svg",
+    "trazo": "1.6",
+    "usos": 1,
+    "primera_pantalla": "Transferir"
+  },
+  {
+    "nombre": "ajustes",
+    "archivo": "ajustes.svg",
+    "trazo": "1.7",
+    "usos": 2,
+    "primera_pantalla": "Perfil"
+  },
+  {
+    "nombre": "alimentacion",
+    "archivo": "alimentacion.svg",
+    "trazo": "1.8",
+    "usos": 2,
+    "primera_pantalla": "Insights"
+  },
+  {
+    "nombre": "atras",
+    "archivo": "atras.svg",
+    "trazo": "2",
+    "usos": 9,
+    "primera_pantalla": "Conversor"
+  },
+  {
+    "nombre": "banco",
+    "archivo": "banco.svg",
+    "trazo": "1.6",
+    "usos": 6,
+    "primera_pantalla": "DesignSystem"
+  },
+  {
+    "nombre": "borrar",
+    "archivo": "borrar.svg",
+    "trazo": "1.6",
+    "usos": 1,
+    "primera_pantalla": "Transferir"
+  },
+  {
+    "nombre": "buscar",
+    "archivo": "buscar.svg",
+    "trazo": "2",
+    "usos": 2,
+    "primera_pantalla": "Movimientos"
+  },
+  {
+    "nombre": "calendario",
+    "archivo": "calendario.svg",
+    "trazo": "1.6",
+    "usos": 1,
+    "primera_pantalla": "Insights"
+  },
+  {
+    "nombre": "campana",
+    "archivo": "campana.svg",
+    "trazo": "1.6",
+    "usos": 2,
+    "primera_pantalla": "Home"
+  },
+  {
+    "nombre": "candado",
+    "archivo": "candado.svg",
+    "trazo": "1.8",
+    "usos": 5,
+    "primera_pantalla": "Login"
+  },
+  {
+    "nombre": "celular",
+    "archivo": "celular.svg",
+    "trazo": "1.6",
+    "usos": 5,
+    "primera_pantalla": "DesignSystem"
+  },
+  {
+    "nombre": "cerrar",
+    "archivo": "cerrar.svg",
+    "trazo": "2.4",
+    "usos": 9,
+    "primera_pantalla": "Conversor"
+  },
+  {
+    "nombre": "cerrar-sesion",
+    "archivo": "cerrar-sesion.svg",
+    "trazo": "1.8",
+    "usos": 1,
+    "primera_pantalla": "Perfil"
+  },
+  {
+    "nombre": "check",
+    "archivo": "check.svg",
+    "trazo": "2.4",
+    "usos": 15,
+    "primera_pantalla": "Conversor"
+  },
+  {
+    "nombre": "check-operacion",
+    "archivo": "check-operacion.svg",
+    "trazo": "2.4",
+    "usos": 3,
+    "primera_pantalla": "Estados-Operacion"
+  },
+  {
+    "nombre": "chevron-abajo",
+    "archivo": "chevron-abajo.svg",
+    "trazo": "2.2",
+    "usos": 2,
+    "primera_pantalla": "Conversor"
+  },
+  {
+    "nombre": "chevron-derecha",
+    "archivo": "chevron-derecha.svg",
+    "trazo": "2",
+    "usos": 19,
+    "primera_pantalla": "DesignSystem"
+  },
+  {
+    "nombre": "compartir",
+    "archivo": "compartir.svg",
+    "trazo": "1.7",
+    "usos": 5,
+    "primera_pantalla": "Cuenta"
+  },
+  {
+    "nombre": "compras",
+    "archivo": "compras.svg",
+    "trazo": "1.6",
+    "usos": 2,
+    "primera_pantalla": "Home"
+  },
+  {
+    "nombre": "congelar",
+    "archivo": "congelar.svg",
+    "trazo": "1.6",
+    "usos": 1,
+    "primera_pantalla": "Tarjetas"
+  },
+  {
+    "nombre": "contactless",
+    "archivo": "contactless.svg",
+    "trazo": "1.7",
+    "usos": 1,
+    "primera_pantalla": "Tarjetas"
+  },
+  {
+    "nombre": "copiar",
+    "archivo": "copiar.svg",
+    "trazo": "1.7",
+    "usos": 1,
+    "primera_pantalla": "Cuenta"
+  },
+  {
+    "nombre": "cuenta-corriente",
+    "archivo": "cuenta-corriente.svg",
+    "trazo": "1.6",
+    "usos": 1,
+    "primera_pantalla": "Productos"
+  },
+  {
+    "nombre": "datos-personales",
+    "archivo": "datos-personales.svg",
+    "trazo": "1.7",
+    "usos": 1,
+    "primera_pantalla": "Perfil"
+  },
+  {
+    "nombre": "descargar",
+    "archivo": "descargar.svg",
+    "trazo": "1.7",
+    "usos": 1,
+    "primera_pantalla": "Movimientos"
+  },
+  {
+    "nombre": "deslizar",
+    "archivo": "deslizar.svg",
+    "trazo": "1.8",
+    "usos": 1,
+    "primera_pantalla": "Tarjetas"
+  },
+  {
+    "nombre": "error",
+    "archivo": "error.svg",
+    "trazo": "1.9",
+    "usos": 2,
+    "primera_pantalla": "DesignSystem"
+  },
+  {
+    "nombre": "escudo-verificado",
+    "archivo": "escudo-verificado.svg",
+    "trazo": "1.7",
+    "usos": 2,
+    "primera_pantalla": "Perfil"
+  },
+  {
+    "nombre": "exclamacion",
+    "archivo": "exclamacion.svg",
+    "trazo": "2.4",
+    "usos": 6,
+    "primera_pantalla": "Estados-Operacion"
+  },
+  {
+    "nombre": "face-id",
+    "archivo": "face-id.svg",
+    "trazo": "1.6",
+    "usos": 4,
+    "primera_pantalla": "Login"
+  },
+  {
+    "nombre": "flecha",
+    "archivo": "flecha.svg",
+    "trazo": "2",
+    "usos": 1,
+    "primera_pantalla": "Flujos"
+  },
+  {
+    "nombre": "globo",
+    "archivo": "globo.svg",
+    "trazo": "1.8",
+    "usos": 3,
+    "primera_pantalla": "Home"
+  },
+  {
+    "nombre": "historial-hora",
+    "archivo": "historial-hora.svg",
+    "trazo": "2",
+    "usos": 1,
+    "primera_pantalla": "Estado-SinConexion"
+  },
+  {
+    "nombre": "informacion",
+    "archivo": "informacion.svg",
+    "trazo": "1.7",
+    "usos": 1,
+    "primera_pantalla": "Notificaciones"
+  },
+  {
+    "nombre": "ingreso",
+    "archivo": "ingreso.svg",
+    "trazo": "1.7",
+    "usos": 5,
+    "primera_pantalla": "Cuenta"
+  },
+  {
+    "nombre": "inicio",
+    "archivo": "inicio.svg",
+    "trazo": "1.7",
+    "usos": 10,
+    "primera_pantalla": "Conversor"
+  },
+  {
+    "nombre": "insights",
+    "archivo": "insights.svg",
+    "trazo": "1.6",
+    "usos": 13,
+    "primera_pantalla": "Conversor"
+  },
+  {
+    "nombre": "lista",
+    "archivo": "lista.svg",
+    "trazo": "1.6",
+    "usos": 1,
+    "primera_pantalla": "Cuenta"
+  },
+  {
+    "nombre": "mas",
+    "archivo": "mas.svg",
+    "trazo": "1.6",
+    "usos": 3,
+    "primera_pantalla": "DesignSystem"
+  },
+  {
+    "nombre": "metas",
+    "archivo": "metas.svg",
+    "trazo": "1.6",
+    "usos": 1,
+    "primera_pantalla": "Home"
+  },
+  {
+    "nombre": "ojo",
+    "archivo": "ojo.svg",
+    "trazo": "1.7",
+    "usos": 4,
+    "primera_pantalla": "Cuenta"
+  },
+  {
+    "nombre": "ojo-oculto",
+    "archivo": "ojo-oculto.svg",
+    "trazo": "1.7",
+    "usos": 2,
+    "primera_pantalla": "Home"
+  },
+  {
+    "nombre": "pagar",
+    "archivo": "pagar.svg",
+    "trazo": "1.6",
+    "usos": 3,
+    "primera_pantalla": "DesignSystem"
+  },
+  {
+    "nombre": "perfil",
+    "archivo": "perfil.svg",
+    "trazo": "1.6",
+    "usos": 12,
+    "primera_pantalla": "Conversor"
+  },
+  {
+    "nombre": "reloj",
+    "archivo": "reloj.svg",
+    "trazo": "1.9",
+    "usos": 5,
+    "primera_pantalla": "Estados-Operacion"
+  },
+  {
+    "nombre": "reproducir",
+    "archivo": "reproducir.svg",
+    "trazo": "1.6",
+    "usos": 1,
+    "primera_pantalla": "Estados-Operacion"
+  },
+  {
+    "nombre": "retiro-sin-tarjeta",
+    "archivo": "retiro-sin-tarjeta.svg",
+    "trazo": "1.6",
+    "usos": 1,
+    "primera_pantalla": "Home"
+  },
+  {
+    "nombre": "ruta-alternativa",
+    "archivo": "ruta-alternativa.svg",
+    "trazo": "2",
+    "usos": 1,
+    "primera_pantalla": "Flujos"
+  },
+  {
+    "nombre": "seguridad-alerta",
+    "archivo": "seguridad-alerta.svg",
+    "trazo": "1.7",
+    "usos": 2,
+    "primera_pantalla": "DesignSystem"
+  },
+  {
+    "nombre": "seguros",
+    "archivo": "seguros.svg",
+    "trazo": "1.6",
+    "usos": 1,
+    "primera_pantalla": "Home"
+  },
+  {
+    "nombre": "servicios",
+    "archivo": "servicios.svg",
+    "trazo": "1.6",
+    "usos": 3,
+    "primera_pantalla": "Movimientos"
+  },
+  {
+    "nombre": "sin-conexion",
+    "archivo": "sin-conexion.svg",
+    "trazo": "1.8",
+    "usos": 1,
+    "primera_pantalla": "Estado-SinConexion"
+  },
+  {
+    "nombre": "tarjeta",
+    "archivo": "tarjeta.svg",
+    "trazo": "1.6",
+    "usos": 16,
+    "primera_pantalla": "Conversor"
+  },
+  {
+    "nombre": "tendencia",
+    "archivo": "tendencia.svg",
+    "trazo": "1.8",
+    "usos": 4,
+    "primera_pantalla": "Home"
+  },
+  {
+    "nombre": "transferencias",
+    "archivo": "transferencias.svg",
+    "trazo": "1.7",
+    "usos": 1,
+    "primera_pantalla": "Notificaciones"
+  },
+  {
+    "nombre": "transferir-salida",
+    "archivo": "transferir-salida.svg",
+    "trazo": "1.7",
+    "usos": 6,
+    "primera_pantalla": "Cuenta"
+  },
+  {
+    "nombre": "transporte",
+    "archivo": "transporte.svg",
+    "trazo": "1.6",
+    "usos": 4,
+    "primera_pantalla": "Cuenta"
+  },
+  {
+    "nombre": "vacio",
+    "archivo": "vacio.svg",
+    "trazo": "1.5",
+    "usos": 2,
+    "primera_pantalla": "DesignSystem"
+  },
+  {
+    "nombre": "wallet",
+    "archivo": "wallet.svg",
+    "trazo": "1.6",
+    "usos": 1,
+    "primera_pantalla": "Tarjetas"
+  },
+  {
+    "nombre": "wifi",
+    "archivo": "wifi.svg",
+    "trazo": "1.6",
+    "usos": 1,
+    "primera_pantalla": "Transferir"
+  }
+]

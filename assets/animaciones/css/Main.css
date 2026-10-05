@@ -1,0 +1,54 @@
+/* BInova · Main · estilos y animaciones tal como se usan en el prototipo */
+body{margin:0;background:#F6F5F2}
+*{box-sizing:border-box}
+/* Sin barras del navegador: el desplazamiento sigue funcionando con gesto, rueda o trackpad */
+html,body{overflow-x:hidden;overscroll-behavior:none;scrollbar-width:none;-ms-overflow-style:none}
+*{scrollbar-width:none;-ms-overflow-style:none;-webkit-tap-highlight-color:transparent}
+*::-webkit-scrollbar{display:none;width:0;height:0;background:transparent}
+:focus:not(:focus-visible){outline:none}
+.app{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.app input,.app textarea{-webkit-user-select:text;user-select:text}
+.app svg,.app img{-webkit-user-drag:none}
+a{color:inherit;text-decoration:none}
+.app{font-family:'Geist',-apple-system,'SF Pro Text',system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:#141518}
+
+/* 0–600ms: el isotipo entra en 3D · 1000–1300ms: se disuelve y BI pasa a ser el wordmark */
+.stage{perspective:700px}
+.tile{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-46px 0 0 -42px;border-radius:24px;
+  background:radial-gradient(120% 120% at 28% 18%,#2C2D33 0%,#17181B 52%,#0E0F11 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 18px 36px rgba(20,21,24,.20);
+  animation:tileLife 1300ms both}
+@keyframes tileLife{
+  0%{opacity:0;transform:rotateX(62deg) rotateY(-38deg) scale(.55);animation-timing-function:cubic-bezier(.16,1,.3,1)}
+  46%{opacity:1;transform:none}
+  77%{opacity:1;transform:none;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+  100%{opacity:0;transform:scale(1.32)}}
+.shadow{position:absolute;left:50%;top:50%;width:70px;height:12px;margin:46px 0 0 -35px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(20,21,24,.20),rgba(20,21,24,0));animation:shadowLife 1300ms both}
+@keyframes shadowLife{0%{opacity:0;transform:scaleX(.4)}46%{opacity:1;transform:none}77%{opacity:1}100%{opacity:0}}
+
+.letters{animation:ink 300ms cubic-bezier(.4,0,.2,1) 1000ms both}
+@keyframes ink{from{color:#F6F5F2}to{color:#141518}}
+.b{display:inline-block;animation:inL 420ms cubic-bezier(.16,1,.3,1) 220ms both}
+.i{display:inline-block;animation:inR 420ms cubic-bezier(.16,1,.3,1) 300ms both}
+@keyframes inL{from{opacity:0;transform:translateX(-14px);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes inR{from{opacity:0;transform:translateX(14px);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+.bar{transform-origin:left center;animation:bar 320ms cubic-bezier(.2,.8,.2,1) 620ms both}
+@keyframes bar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.nova{display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:top;animation:nova 460ms cubic-bezier(.65,0,.35,1) 1050ms both}
+@keyframes nova{from{max-width:0;opacity:0}to{max-width:110px;opacity:1}}
+.slogan{animation:slogan 900ms ease 1400ms both}
+@keyframes slogan{0%{opacity:0;transform:translateY(6px)}30%{opacity:1;transform:none}78%{opacity:1}100%{opacity:0}}
+.group{animation:exit 220ms cubic-bezier(.4,0,1,1) 2250ms both}
+@keyframes exit{to{opacity:0;transform:scale(.985)}}
+.foot{animation:fade 400ms ease 700ms both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+@media (prefers-reduced-motion: reduce){
+  .tile,.shadow{animation:none;opacity:0}
+  .letters{animation:none;color:#141518}
+  .b,.i,.bar,.nova{animation:none}
+  .nova{max-width:110px}
+  .group{animation:fade 300ms ease both}
+  .slogan{animation:fade 300ms ease 200ms both}
+}

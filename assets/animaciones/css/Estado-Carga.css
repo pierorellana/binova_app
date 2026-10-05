@@ -1,0 +1,17 @@
+/* BInova · Estado-Carga · estilos y animaciones tal como se usan en el prototipo */
+body{margin:0;background:#F6F5F2}
+*{box-sizing:border-box}
+/* Sin barras del navegador: el desplazamiento sigue funcionando con gesto, rueda o trackpad */
+html,body{overflow-x:hidden;overscroll-behavior:none;scrollbar-width:none;-ms-overflow-style:none}
+*{scrollbar-width:none;-ms-overflow-style:none;-webkit-tap-highlight-color:transparent}
+*::-webkit-scrollbar{display:none;width:0;height:0;background:transparent}
+:focus:not(:focus-visible){outline:none}
+.app{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.app input,.app textarea{-webkit-user-select:text;user-select:text}
+.app svg,.app img{-webkit-user-drag:none}
+a{color:inherit;text-decoration:none}
+.app{font-family:'Geist',-apple-system,'SF Pro Text',system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:#141518}
+@keyframes shimmer{from{background-position:120% 0}to{background-position:-20% 0}}
+.sk{background:linear-gradient(90deg,#ECEAE5 0%,#ECEAE5 40%,#F5F3EF 50%,#ECEAE5 60%,#ECEAE5 100%);background-size:300% 100%;animation:shimmer 1400ms ease-in-out infinite}
+.skd{background:linear-gradient(90deg,#24252A 0%,#24252A 40%,#2E2F35 50%,#24252A 60%,#24252A 100%);background-size:300% 100%;animation:shimmer 1400ms ease-in-out infinite}
+@media (prefers-reduced-motion: reduce){.sk,.skd{animation:none}}

@@ -1,0 +1,97 @@
+/* BInova · Tarjetas · estilos y animaciones tal como se usan en el prototipo */
+body{margin:0;background:#F6F5F2}
+*{box-sizing:border-box}
+/* Sin barras del navegador: el desplazamiento sigue funcionando con gesto, rueda o trackpad */
+html,body{overflow-x:hidden;overscroll-behavior:none;scrollbar-width:none;-ms-overflow-style:none}
+*{scrollbar-width:none;-ms-overflow-style:none;-webkit-tap-highlight-color:transparent}
+*::-webkit-scrollbar{display:none;width:0;height:0;background:transparent}
+:focus:not(:focus-visible){outline:none}
+.app{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.app input,.app textarea{-webkit-user-select:text;user-select:text}
+.app svg,.app img{-webkit-user-drag:none}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.app{font-family:'Geist',-apple-system,'SF Pro Text',system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:#141518}
+.num{font-variant-numeric:tabular-nums}
+.press{transition:transform 160ms cubic-bezier(.2,.8,.2,1),opacity 160ms ease}
+.press:active{transform:scale(0.97);opacity:0.86}
+.st{animation:rise 380ms cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.fade{animation:fadeIn 300ms ease both}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ===== Pila de tarjetas =====
+   Posición/escala/orden: transición de 720 ms (ease-out). Las tarjetas de atrás se achican un 4% y se oscurecen. */
+.stage{position:absolute;left:0;right:0;top:0;height:844px;perspective:1100px;pointer-events:none}
+.card{position:absolute;left:24px;top:0;width:342px;height:216px;transform-origin:50% 0;pointer-events:auto;perspective:1200px;
+  transition:transform 720ms cubic-bezier(.2,.8,.2,1),filter 720ms ease}
+.lift{transform-style:preserve-3d;width:100%;height:100%}
+.card.arc .lift{animation:arc 720ms cubic-bezier(.2,.8,.2,1) both}
+@keyframes arc{0%{transform:none}40%{transform:rotateX(16deg) translateZ(18px)}100%{transform:none}}
+.card.building .lift{animation:enter 620ms cubic-bezier(.16,1,.3,1) both}
+@keyframes enter{from{opacity:0;transform:translateY(40px) rotateX(26deg) scale(.9)}to{opacity:1;transform:none}}
+.tilt{width:100%;height:100%;transform-style:preserve-3d;transition:transform 180ms ease-out}
+.flip{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 640ms cubic-bezier(.65,0,.35,1)}
+.side{position:absolute;inset:0;border-radius:20px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 18px 40px rgba(20,21,24,.16),0 2px 6px rgba(20,21,24,.08)}
+.side.back{transform:rotateY(180deg)}
+
+/* Construcción de una tarjeta: contorno → relleno que barre → brillo → detalles → dígitos */
+.outline{position:absolute;inset:0;overflow:visible;opacity:0;pointer-events:none}
+.building .outline{animation:outlineLife 1100ms ease both}
+@keyframes outlineLife{0%{opacity:1}70%{opacity:1}100%{opacity:0}}
+.outline rect{fill:none;stroke:#141518;stroke-width:1.5;stroke-dasharray:1;stroke-dashoffset:1}
+.building .outline rect{animation:draw 520ms cubic-bezier(.65,0,.35,1) 60ms forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.building .fill{animation:wipe 520ms cubic-bezier(.65,0,.35,1) 380ms both}
+@keyframes wipe{from{clip-path:inset(0 100% 0 0 round 20px)}to{clip-path:inset(0 0 0 0 round 20px)}}
+.sweep{position:absolute;top:-20%;bottom:-20%;width:38%;left:-40%;transform:skewX(-18deg);background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.22),rgba(255,255,255,0));opacity:0}
+.building .sweep{animation:sweep 700ms cubic-bezier(.4,0,.2,1) 820ms both}
+@keyframes sweep{0%{left:-40%;opacity:1}100%{left:110%;opacity:0}}
+.building .d{animation:rise 360ms cubic-bezier(.2,.8,.2,1) both}
+.building .d1{animation-delay:860ms}.building .d2{animation-delay:940ms}.building .d3{animation-delay:1020ms}
+.building .dg{display:inline-block;animation:digit 220ms cubic-bezier(.2,.8,.2,1) both}
+@keyframes digit{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.building .g1{animation-delay:1060ms}.building .g2{animation-delay:1120ms}.building .g3{animation-delay:1180ms}.building .g4{animation-delay:1240ms}
+.shade{position:absolute;inset:0;border-radius:20px;background:#0E0F11;pointer-events:none;transition:opacity 720ms ease}
+.hit{position:absolute;inset:0;border-radius:20px;z-index:3;touch-action:pan-y}
+.hit:focus-visible{outline:2px solid #FF9000;outline-offset:3px}
+
+.slot{position:absolute;left:24px;width:342px;height:216px;border-radius:20px;border:1.5px dashed #C9C6BF;display:flex;align-items:center;justify-content:center;transition:opacity 300ms ease}
+.bar3{flex:1;height:3px;border-radius:2px;background:#E4E1DB;overflow:hidden}
+.bar3 span{display:block;height:100%;background:#141518;transform-origin:left;transition:transform 500ms cubic-bezier(.2,.8,.2,1)}
+
+.frost{position:absolute;inset:0;border-radius:20px;background:rgba(246,245,242,.42);backdrop-filter:blur(1.5px);-webkit-backdrop-filter:blur(1.5px);display:flex;align-items:flex-start;justify-content:flex-end;padding:14px;pointer-events:none;transition:opacity 360ms ease;z-index:2}
+.frost svg{background:#FFFFFF;border-radius:50%;padding:6px;box-sizing:content-box;box-shadow:0 2px 8px rgba(20,21,24,.12)}
+.card.failing .lift{animation:failOut 700ms cubic-bezier(.4,0,1,1) 200ms both}
+@keyframes failOut{0%{transform:none;opacity:1}20%{transform:translateX(-6px)}40%{transform:translateX(5px)}60%{transform:translateX(-2px);opacity:1}100%{transform:translateY(24px) scale(.94);opacity:0}}
+.under{transition:filter 360ms cubic-bezier(.2,.8,.2,1),opacity 360ms ease}
+.under.blur{filter:blur(8px);opacity:.6}
+.hud{width:148px;height:148px;border-radius:34px;background:rgba(251,250,248,.86);backdrop-filter:blur(28px) saturate(140%);-webkit-backdrop-filter:blur(28px) saturate(140%);box-shadow:inset 0 0 0 1px rgba(20,21,24,.06),0 20px 50px rgba(20,21,24,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;animation:hudIn 320ms cubic-bezier(.16,1,.3,1) both}
+@keyframes hudIn{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:none}}
+.hud.ok{animation:hudPop 480ms cubic-bezier(.2,.8,.2,1) both}
+@keyframes hudPop{0%{transform:scale(1)}40%{transform:scale(1.05)}100%{transform:scale(1)}}
+.hud .corners,.hud .face{transform-origin:32px 32px;transition:transform 300ms cubic-bezier(.2,.8,.2,1),opacity 240ms ease}
+.hud.scan .corners{animation:breathe 900ms ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(.92)}}
+.hud .scanline{opacity:0}
+.hud.scan .scanline{opacity:1;animation:hsweep 1000ms cubic-bezier(.65,0,.35,1) infinite alternate}
+@keyframes hsweep{from{transform:translateY(0)}to{transform:translateY(34px)}}
+.hud.ok .corners{transform:scale(.6);opacity:0}
+.hud.ok .face{transform:scale(.7);opacity:0}
+.hud .okring,.hud .okcheck{stroke-dasharray:1;stroke-dashoffset:1}
+.hud.ok .okring{animation:draw 400ms cubic-bezier(.2,.8,.2,1) 100ms forwards}
+.hud.ok .okcheck{animation:draw 280ms cubic-bezier(.2,.8,.2,1) 360ms forwards}
+@keyframes sheetIn{from{transform:translateY(100%)}to{transform:none}}
+@keyframes dimIn{from{opacity:0;backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0)}to{opacity:1;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}}
+.sheet{animation:sheetIn 440ms cubic-bezier(.32,.72,0,1) both}
+.dim{animation:dimIn 300ms ease both}
+@keyframes toast{0%{opacity:0;transform:translateY(8px)}12%,85%{opacity:1;transform:none}100%{opacity:0}}
+.toast{animation:toast 2400ms ease both}
+@media (prefers-reduced-motion: reduce){
+  .card,.tilt,.flip{transition:opacity 200ms ease}
+  .card.arc .lift,.card.building .lift,.card.failing .lift,.building .outline,.building .outline rect,.building .fill,.building .sweep,.building .d,.building .dg,.hud,.hud.ok,.sheet{animation:fadeIn 200ms ease both}
+  .hud.scan .corners,.hud.scan .scanline{animation:none}
+  .hud.ok .okring,.hud.ok .okcheck{animation:none;stroke-dashoffset:0}
+  .st{animation:fadeIn 200ms ease both}
+}

@@ -47,10 +47,6 @@ class AppConfig {
   }
 
   static String get _defaultLocalBaseUrl {
-
-
-    return defaultTargetPlatform == TargetPlatform.android
-        ? 'http://10.0.2.2:3000/v1'
-        : 'http://localhost:3000/v1';
+    return 'https://9hqbzkgw-3000.use.devtunnels.ms/v1';
   }
 }

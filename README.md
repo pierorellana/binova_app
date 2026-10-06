@@ -1,153 +1,231 @@
-
 # BInova Mobile
 
-Aplicación móvil Flutter de la prueba técnica Senior Front-End de BInova. Consume el API
-REST versionado /v1 y conserva una arquitectura por features, contratos y capas.
+<p align="center">
+  <img src="assets/logo/binova-lockup.png" alt="BInova" width="320">
+</p>
 
-## Estado actual
+<p align="center">
+  Una experiencia financiera digital clara, segura y diseñada para el día a día.
+</p>
 
-- Flutter/Dart con Clean Architecture por feature y Provider/ChangeNotifier.
-- Onboarding, autenticación, refresh de sesión, almacenamiento seguro y biometría local.
-- Dashboard server-driven, cuentas, movimientos, tarjetas, operaciones demo, insights,
-  tipo de cambio, notificaciones, perfil y estados degradados.
-- Logging de respuestas API sanitizado con método, ruta, status, latencia, mensaje, código
-  y traceId.
-- Firebase Cloud Messaging implementado únicamente para Android, con recepción en primer
-  plano, segundo plano y app terminada.
-- Prueba E2E crítica ejecutada correctamente en un iPhone físico.
-- Pruebas de widgets, semántica y objetivos táctiles Android/iOS aprobadas.
+<p align="center">
+  <a href="https://drive.google.com/file/d/12PDgPL1jZtO3jYduxqTKjcB9-YxsrHaS/view?usp=sharing">▶ Ver demo en ejecución</a>
+  ·
+  <a href="#inicio-rápido">Comenzar</a>
+  ·
+  <a href="#arquitectura">Arquitectura</a>
+</p>
 
-## Requisitos
+<p align="center">
+  <strong>Flutter</strong> · <strong>Provider</strong> · <strong>Clean Architecture</strong> · <strong>Android + iOS</strong>
+</p>
 
-- Flutter SDK compatible con Dart >=3.5.0 <4.0.0.
-- El repositorio fija Flutter 3.47.5 mediante FVM.
-- Android Studio/Xcode según la plataforma de ejecución.
-- Un API BInova accesible y PostgreSQL activo para el entorno local.
+> BInova es la aplicación móvil de la prueba técnica Senior Front-End para Banco Internacional. El proyecto prioriza una experiencia bancaria moderna, modular y confiable, con flujos de autenticación, productos, operaciones, tarjetas virtuales y estados degradados.
 
-## Instalación y ejecución
+## Producto en una mirada
 
-    fvm flutter pub get
-    fvm flutter test
-    fvm flutter analyze
+| Experiencia | Capacidades | Enfoque técnico |
+|---|---|---|
+| Inicio | Saldo, productos, acciones rápidas y recomendaciones | UI orientada a tareas y estados server-driven acotados |
+| Operaciones | Transferir, pagar y recargar | Confirmación, biometría, idempotencia y estados de resultado |
+| Tarjetas | Stack visual, tarjeta virtual, congelar, límites y Wallet | Animaciones nativas, perspectiva y control de estado |
+| Seguridad | Login, sesión segura, refresh y Face ID | Secure storage, biometría local y errores explícitos |
+| Resiliencia | Offline, stale, timeout, retry y servicio parcial | Caché local y Developer Tools para demostración |
 
-Para ejecutar con el API local:
+## Experiencia visual
 
-    fvm flutter run \
-      --dart-define=API_BASE_URL=http://localhost:3000/v1 \
-      --dart-define=ENVIRONMENT=local
+Las siguientes capturas fueron obtenidas directamente del prototipo HTML de referencia y se versionan dentro de este repositorio para que la presentación del proyecto sea autocontenida.
 
-En Android Emulator, el API del equipo normalmente se expone como
-http://10.0.2.2:3000/v1. En un dispositivo físico se debe usar una URL accesible por
-la red del dispositivo, por ejemplo un túnel HTTPS:
+<table align="center">
+  <tr>
+    <td align="center"><img src="docs/media/prototype-home.png" alt="BInova Home" width="250"><br><sub>Home</sub></td>
+    <td align="center"><img src="docs/media/prototype-cards.png" alt="BInova tarjetas" width="250"><br><sub>Tarjetas</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/media/prototype-transfer.png" alt="BInova transferencia" width="250"><br><sub>Transferencias</sub></td>
+    <td align="center"><img src="docs/media/prototype-virtual-card.png" alt="BInova tarjeta virtual" width="250"><br><sub>Tarjeta virtual</sub></td>
+  </tr>
+</table>
 
-    fvm flutter run \
-      --dart-define=API_BASE_URL=https://9hqbzkgw-3000.use.devtunnels.ms/v1 \
-      --dart-define=ENVIRONMENT=local
+## Demo en ejecución
 
-API_BASE_URL sobrescribe la URL compilada por defecto. Los valores soportados para
-ENVIRONMENT son local, dev, test, demo y prodEvolution.
+🎬 **[Ver la demostración completa en Google Drive](https://drive.google.com/file/d/12PDgPL1jZtO3jYduxqTKjcB9-YxsrHaS/view?usp=sharing)**
 
-Developer Tools está disponible en debug o cuando ENVIRONMENT=demo y
-ENABLE_DEMO_TOOLS=true. Permite simular red normal, lenta, offline, error de servidor
-y timeout para comprobar estados degradados.
+La demo muestra la aplicación levantada, sus transiciones y los flujos principales de navegación. Si el enlace solicita permisos, se debe abrir con una cuenta autorizada por el propietario del archivo.
+
+## Funcionalidades principales
+
+- Splash, onboarding, login, sesión segura, refresh y Face ID.
+- Home con saldo, productos, acciones rápidas, movimientos y sección Para ti.
+- Cuentas, detalle de producto, movimientos paginados y detalle en hoja visual.
+- Transferencias, pagos y recargas con confirmación y estados `processing`, `succeeded`, `pending` y `failed`.
+- Creación de tarjeta virtual con confirmación biométrica y animación de construcción/apilado.
+- Gestión de tarjetas: congelar/descongelar, límites y handoff a Wallet.
+- Insights, conversor de moneda, notificaciones, perfil y preferencias.
+- Estados de carga, error, timeout, offline, stale, reintento y servicio parcialmente disponible.
+- Developer Tools para demostrar `normal`, `slow`, `offline`, `server error` y `timeout`.
+
+La recuperación de contraseña forma parte únicamente de la experiencia visual del prototipo. No existe endpoint ni persistencia backend para este flujo en el MVP.
+
+## Stack
+
+| Área | Tecnología |
+|---|---|
+| Aplicación | Flutter / Dart |
+| Estado | Provider / ChangeNotifier |
+| Arquitectura | Clean Architecture organizada por features |
+| Seguridad | `flutter_secure_storage` y `local_auth` |
+| Red | Cliente HTTP autenticado, refresh y envelope REST |
+| Notificaciones | Firebase Cloud Messaging y notificaciones locales |
+| Diseño | Geist, SVG, design tokens y motion nativo |
+| Soporte de datos | API NestJS, PostgreSQL y Prisma |
+
+## Inicio rápido
+
+### Requisitos
+
+- Flutter 3.47.5 y Dart compatible.
+- FVM instalado.
+- Android Studio con un emulador Android, o Xcode con un simulador/dispositivo iOS.
+- Node.js, npm y Docker Compose si se utilizará el API local.
+
+### Instalar dependencias
+
+Desde la raíz de este repositorio:
+
+```bash
+fvm install
+fvm use 3.47.5
+fvm flutter pub get
+```
+
+### Levantar el API local
+
+El API es soporte de integración para ejecutar los flujos con datos reales. Desde un checkout local del API:
+
+```powershell
+Copy-Item .env.example .env
+npm ci
+npm run prisma:generate
+docker compose up -d postgres
+npm run prisma:deploy
+npm run seed
+npm run start:dev
+```
+
+El API queda disponible en `http://localhost:3000/v1`.
+
+Credenciales de demostración:
+
+```text
+Usuario:    demo@binova.local
+Contraseña: Demo1234!
+```
+
+### Ejecutar en Android Emulator
+
+```bash
+fvm flutter run \
+  --dart-define=API_BASE_URL=http://10.0.2.2:3000/v1 \
+  --dart-define=ENVIRONMENT=local
+```
+
+### Ejecutar en iOS Simulator
+
+```bash
+fvm flutter run \
+  --dart-define=API_BASE_URL=http://127.0.0.1:3000/v1 \
+  --dart-define=ENVIRONMENT=local
+```
+
+### Ejecutar en dispositivo físico
+
+Usa una dirección accesible desde el dispositivo, preferiblemente HTTPS:
+
+```bash
+fvm flutter run \
+  --dart-define=API_BASE_URL=https://<host-accesible>/v1 \
+  --dart-define=ENVIRONMENT=local
+```
+
+`API_BASE_URL` sobrescribe la URL compilada por defecto. Los ambientes soportados son `local`, `dev`, `test`, `demo` y `prodEvolution`.
+
+## Flujos recomendados para revisar
+
+1. Splash → onboarding → login → Face ID/reingreso.
+2. Home → Productos → Cuenta → Movimientos → Detalle.
+3. Tarjetas → Crear tarjeta virtual → Face ID → construcción/apilado → resultado.
+4. Detalle de tarjeta → congelar/descongelar → límites → Wallet.
+5. Transferir, pagar y recargar → confirmación → biometría → resultado.
+6. Insights, conversor, notificaciones y perfil.
+7. Developer Tools → offline/timeout/error → retry y recuperación.
+
+## Pruebas y calidad
+
+```bash
+fvm flutter analyze
+fvm flutter test
+fvm flutter test test/widgets_accessibility_test.dart
+```
+
+El E2E crítico se ejecuta con el API accesible desde un emulador o dispositivo:
+
+```bash
+fvm flutter test integration_test/critical_flow_test.dart \
+  -d <device-id> \
+  --dart-define=API_BASE_URL=http://10.0.2.2:3000/v1 \
+  --dart-define=ENVIRONMENT=local
+```
+
+Flujo cubierto:
+
+```text
+Login → Home → Productos → Cuenta de ahorros → Movimientos → Detalle
+```
 
 ## Arquitectura
 
-    lib/
-      app/        bootstrap, routing, theme
-      core/       config, network, errors, security, storage, observability, UI
-      features/   auth, onboarding, home, accounts, transactions, cards,
-                  operations, insights, exchange, notifications, profile
+```text
+lib/
+├── app/          # bootstrap, routing, tema y navegación
+├── core/         # red, errores, seguridad, storage, observabilidad y design system
+└── features/     # auth, home, accounts, transactions, cards, operations,
+                  # insights, exchange, notifications y profile
+```
 
-Cada feature conserva data, domain y presentation. La UI no realiza HTTP directamente:
-los datasources consumen el contrato, los repositorios aplican mapeo y caché, y los
-providers coordinan el estado de pantalla.
+Cada feature separa `data`, `domain` y `presentation`:
 
-## Contrato del API
+- `data`: data sources remotos, DTOs y repositories.
+- `domain`: entidades, contratos y reglas independientes de Flutter.
+- `presentation`: páginas, widgets y controllers Provider/ChangeNotifier.
 
-Las respuestas exitosas usan este envelope:
+Los widgets no realizan HTTP directamente. Los controllers coordinan los casos de uso y exponen estados de presentación para la UI.
 
-    {
-      "data": { "id": "resource-1" },
-      "message": "Operación exitosa.",
-      "statusCode": 200,
-      "meta": {
-        "traceId": "api-...",
-        "generatedAt": "2026-10-05T12:00:00.000Z",
-        "nextCursor": null
-      }
-    }
+## Firebase y notificaciones
 
-Los errores usan data: null y agregan code y details. El contrato ejecutable está en
-[context_specs/contracts/openapi.yaml](../context_specs/contracts/openapi.yaml).
-X-Correlation-Id enlaza la llamada móvil con el API y meta.nextCursor soporta lecturas
-paginadas.
+La integración Android utiliza `firebase_core`, `firebase_messaging` y notificaciones locales. El registro de dispositivos y el inbox consumen el API REST.
 
-## Firebase y push Android
+- `android/app/google-services.json` y `lib/firebase_options.dart` contienen la configuración pública Android necesaria para el proyecto configurado.
+- El archivo de cuenta de servicio Firebase pertenece al API y nunca debe copiarse al app ni versionarse.
+- La configuración iOS requiere `GoogleService-Info.plist`, capacidades nativas, permisos y credenciales del ambiente final.
+- Nunca versionar claves privadas, tokens FCM, `.env` ni cuentas de servicio.
 
-La integración Android usa:
+## Colaboración
 
-- android/app/google-services.json del proyecto Firebase binova-92083.
-- lib/firebase_options.dart generado para Android.
-- Firebase Core, Firebase Messaging y notificaciones locales.
-- Registro y revocación de dispositivos mediante /v1/devices.
-- Inbox y navegación allowlisted desde notificaciones.
+El repositorio utiliza Trunk Based Development:
 
-En primer plano se muestra una notificación local. En segundo plano o con la app
-terminada, Android usa la bandeja FCM y los taps se resuelven mediante
-onMessageOpenedApp o getInitialMessage.
+- `main` debe permanecer integrable.
+- Los cambios pequeños pueden integrarse directamente; los cambios mayores usan ramas cortas.
+- Cada commit representa una sola intención y utiliza Conventional Commits: `feat`, `fix`, `test`, `docs`, `refactor` o `chore`.
+- Antes de integrar: `fvm flutter analyze`, `fvm flutter test` y revisión visual cuando el cambio afecte UI.
 
-El token FCM no se persiste ni se escribe en logs. El payload contiene únicamente
-type, notificationId, resourceType y resourceId. El archivo de cuenta de servicio de
-Firebase pertenece al API, está excluido por .gitignore y nunca debe copiarse al
-proyecto Flutter.
+## Limitaciones conocidas
 
-La validación manual Android fue realizada y confirmada en el dispositivo de prueba.
-iOS push permanece fuera del alcance aprobado; la app no inicializa Firebase en iOS.
+- Firebase/FCM iOS y la configuración final por ambiente dependen de credenciales externas.
+- El proveedor FX real requiere URL y credenciales; el adapter demo es determinista.
+- El signing y el despliegue productivo no forman parte del cierre local de la prueba.
+- La recuperación de contraseña es solamente visual.
 
-## Logging sanitizado
+## API de soporte
 
-En local, debug y demo, los logs aparecen en la consola de Flutter/Dart. No se registran
-cuerpos de respuesta, cuerpos de solicitud, headers de autorización, tokens,
-contraseñas, saldos, PAN/CVV, números completos de cuenta/tarjeta ni claves de
-idempotencia.
-
-## Pruebas y evidencia
-
-Pruebas rápidas:
-
-    fvm flutter test
-    fvm flutter test test/widgets_accessibility_test.dart
-
-La suite actual cubre contrato/envelope, logging, autenticación, sesión, push, modos de
-red, onboarding y widgets. El E2E crítico se ejecuta en un dispositivo físico:
-
-    fvm flutter test integration_test/critical_flow_test.dart \
-      -d 00008140-001461680A7B801C \
-      --dart-define=API_BASE_URL=https://9hqbzkgw-3000.use.devtunnels.ms/v1 \
-      --dart-define=ENVIRONMENT=local
-
-Flujo E2E validado:
-
-Login -> Home -> Productos -> Cuenta de ahorros -> Movimientos -> Detalle
-
-La evidencia se conserva en
-[context_specs/evidence/e2e-critical-flow-2026-10-05.md](../context_specs/evidence/e2e-critical-flow-2026-10-05.md)
-y
-[context_specs/evidence/widget-accessibility-validation-2026-10-05.md](../context_specs/evidence/widget-accessibility-validation-2026-10-05.md).
-
-## Limitaciones actuales
-
-- No hay workflow CI/CD publicado para análisis, tests, OpenAPI, migraciones y secret scan.
-- El proveedor FX real requiere URL y credenciales externas; el adapter demo funciona sin
-  esas credenciales.
-- Crashlytics/Sentry, métricas persistidas, dashboards y alertas de producción no están
-  configurados.
-- El signing de release y el despliegue productivo quedan fuera de esta entrega.
-- La recuperación de contraseña tiene únicamente la experiencia visual del prototipo;
-  no existe endpoint backend.
-- El E2E de transferencia con Face ID y la recuperación E2E de estados offline todavía
-  no están automatizados.
-
-La configuración pública de Firebase para Android no reemplaza el secreto de cuenta de
-servicio del backend. Nunca subas claves privadas, .env ni tokens a Git.
+El backend complementario está disponible en [api_binova](https://github.com/pierorellana/api_binova). Para una demostración completamente local, levanta el API y configura `API_BASE_URL` según la plataforma.
